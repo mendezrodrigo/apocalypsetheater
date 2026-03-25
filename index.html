@@ -1,1 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apocalypse Theater</title>
+    <meta
+      name="description"
+      content="Apocalypse Theater is a cinematic concept and intellectual universe exploring philosophy, myth, tension, memory, and modern storytelling."
+    />
+    <style>
+      :root {
+        --bg: #020202;
+        --bg-soft: #090909;
+        --panel: #0b0b0b;
+        --text: #dbe3ff;
+        --muted: #b7c2e8;
+        --soft-text: #f4efcf;
+        --line: rgba(189, 205, 255, 0.45);
+        --accent: #b9c4f0;
+        --accent-strong: #9aa9e8;
+        --accent-soft: rgba(185, 196, 240, 0.14);
+        --gold-soft: #efecc9;
+        --shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        --max: 1160px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: linear-gradient(180deg, #000000 0%, #040404 55%, #020202 100%);
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      .container {
+        width: min(calc(100% - 2rem), var(--max));
+        margin: 0 auto;
+      }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(12px);
+        background: rgba(0, 0, 0, 0.9);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.3rem 0;
+      }
+
+      .brand {
+        letter-spacing: -0.04em;
+        font-size: clamp(1.4rem, 2.4vw, 2.1rem);
+        font-weight: 700;
+        color: var(--text);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 1.2rem;
+        align-items: center;
+        color: var(--muted);
+        font-size: 0.98rem;
+      }
+
+      .nav-links a:hover,
+      .nav-links a:focus-visible {
+        color: var(--soft-text);
+      }
+
+      .hero {
+        min-height: 92vh;
+        display: grid;
+        place-items: center;
+        padding: 4rem 0 4rem;
+      }
+
+      .hero-card {
+        width: 100%;
+        padding: 3.75rem;
+        border: 1px solid var(--line);
+        background: linear-gradient(180deg, rgba(10, 10, 10, 0.96), rgba(7, 7, 7, 0.98));
+        box-shadow: var(--shadow);
+        border-radius: 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at top left, rgba(185, 196, 240, 0.09), transparent 32%);
+        pointer-events: none;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: var(--soft-text);
+        font-size: 0.78rem;
+        margin-bottom: 1.2rem;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 2rem;
+        height: 1px;
+        background: var(--soft-text);
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        line-height: 1.05;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      h1 {
+        font-size: clamp(3rem, 7vw, 5.5rem);
+        max-width: 11ch;
+        margin-bottom: 1rem;
+        color: var(--text);
+      }
+
+      h2 {
+        color: var(--text);
+      }
+
+      .hero-copy {
+        max-width: 42rem;
+        color: var(--muted);
+        font-size: 1.08rem;
+        margin-bottom: 2rem;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        padding: 0.95rem 1.6rem;
+        border: 1px solid var(--line);
+        transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        font-weight: 700;
+      }
+
+      .button:hover,
+      .button:focus-visible {
+        transform: translateY(-2px);
+      }
+
+      .button-primary {
+        background: var(--accent);
+        color: #050505;
+        border-color: transparent;
+      }
+
+      .button-primary:hover,
+      .button-primary:focus-visible {
+        background: var(--accent-strong);
+      }
+
+      .button-secondary {
+        background: transparent;
+        color: var(--soft-text);
+        border-color: rgba(239, 236, 201, 0.45);
+      }
+
+      section {
+        padding: 5rem 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .section-head {
+        display: grid;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .section-head p {
+        margin: 0;
+        max-width: 44rem;
+        color: var(--muted);
+      }
+
+      .grid {
+        display: grid;
+        gap: 1.25rem;
+      }
+
+      .grid-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .card {
+        padding: 1.6rem;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .card h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.8rem;
+        color: var(--text);
+      }
+
+      .card p,
+      .list-item span {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .manifesto {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 1.25rem;
+      }
+
+      .quote {
+        font-size: clamp(1.8rem, 3vw, 2.6rem);
+        line-height: 1.25;
+        color: var(--text);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-weight: 600;
+      }
+
+      .list {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .list-item {
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .list-item:last-child {
+        border-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      .list-item strong {
+        display: block;
+        margin-bottom: 0.35rem;
+        font-size: 1rem;
+        color: var(--soft-text);
+      }
+
+      .contact-box {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 1rem;
+        align-items: center;
+      }
+
+      footer {
+        padding: 2rem 0 3rem;
+        color: var(--muted);
+        border-top: 1px solid var(--line);
+      }
+
+      .footer-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      @media (max-width: 900px) {
+        .grid-3,
+        .manifesto,
+        .contact-box {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-card {
+          padding: 2rem;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .nav {
+          align-items: flex-start;
+          gap: 1rem;
+          flex-direction: column;
+        }
+
+        .nav-links {
+          flex-wrap: wrap;
+          gap: 0.8rem 1rem;
+        }
+
+        h1 {
+          max-width: 100%;
+        }
+      }
+          .split {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        min-height: 520px;
+        border-top: 1px solid var(--line);
+      }
+
+      .split-text {
+        padding: 4rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: #000;
+      }
+
+      .split-text h2 {
+        font-size: clamp(2.2rem, 3vw, 3rem);
+        margin-bottom: 1rem;
+      }
+
+      .split-text p {
+        color: var(--muted);
+        max-width: 36rem;
+      }
+
+      .split-image {
+        position: relative;
+        background: #000;
+      }
+
+      .split-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: grayscale(100%) contrast(110%);
+        opacity: 0.85;
+      }
+
+      .split-image::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg, rgba(120,0,0,0.25), transparent 40%, rgba(0,0,120,0.25));
+        mix-blend-mode: overlay;
+      }
+
+      .brand-mark {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: conic-gradient(red, blue);
+        margin-right: 0.8rem;
+      }
+
+      .brand-wrap {
+        display: flex;
+        align-items: center;
+      }
+
+      @media (max-width: 900px) {
+        .split {
+          grid-template-columns: 1fr;
+        }
+        .split-text {
+          padding: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav">
+        <div class="brand-wrap"><div class="brand-mark"></div><a href="#top" class="brand">Apocalypse Theater</a></div>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="#mission">Mission</a>
+          <a href="#philosophy">Philosophy</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="container">
+          <div class="hero-card">
+            <span class="eyebrow">Cinema · Myth · Memory · Tension</span>
+            <h1>Apocalypse Theater</h1>
+            <p class="quote" style="margin-bottom:1.5rem; max-width:28rem;">
+              Cinema reveals. It reconstructs reality.
+            </p>
+            <p class="hero-copy" style="max-width:26rem;">
+              Seize your mind. Pierce your heart. Regain your soul.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#mission">Enter the vision</a>
+              <a class="button button-secondary" href="#contact">Get in touch</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="split">
+        <div class="split-text">
+          <span class="eyebrow">Our Vision</span>
+          <h2>Founder’s Inspiration</h2>
+          <p>
+            Apocalypse Theater emerges from the fusion of classical narrative, nonlinear structure, and sound-driven cinema. It is a language of mood, tension, and intuition — where image, music, and silence construct meaning beyond linear form.
+          </p>
+        </div>
+        <div class="split-image">
+          <img src="https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?q=80&w=1400&auto=format&fit=crop" alt="cinema black and white" />
+        </div>
+      </section>
+
+      <section id="mission">
+        <div class="container">
+          <div class="section-head">
+            <span class="eyebrow">Our Vision</span>
+            <h2>Founder’s Inspiration</h2>
+            <p>
+              A cinematic language shaped by myth, sound, and nonlinear time. Meaning is not delivered — it is discovered.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="philosophy">
+        <div class="container">
+          <div class="section-head">
+            <span class="eyebrow">Our Offerings</span>
+            <h2>Cinematic production across sound, story, and visual identity.</h2>
+          </div>
+
+          <div class="grid grid-3">
+            <article class="card">
+              <h3>Movie Soundscapes</h3>
+              <p>
+                Immersive, emotionally precise sound design that elevates narrative depth and atmosphere.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Short Films</h3>
+              <p>
+                End-to-end cinematic storytelling — from concept and script to production and final edit.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Movie Trailers</h3>
+              <p>
+                High-impact visual storytelling for brands and narratives that demand attention and memory.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="container">
+          <div class="section-head">
+            <span class="eyebrow">Team</span>
+            <h2>Built through collaboration, driven by vision.</h2>
+            <p>
+              A convergence of vision, craft, and cinematic intuition.
+            </p>
+          </div>
+
+          <div class="grid grid-3">
+            <div class="card">
+              <h3>Rodrigo Mendez</h3>
+              <p><strong>Founder / Writer</strong><br/>Vision-led storytelling shaped by philosophy, cinema, and technology.</p>
+              <p>rodrigo@myapocalypsetheater.de</p>
+            </div>
+            <div class="card">
+              <h3>Agustin Wagner</h3>
+              <p><strong>Creative Director</strong><br/>Cinematic direction and artistic execution across visual narratives.</p>
+              <p>agustin.wagner@apachestudios.com</p>
+            </div>
+            <div class="card">
+              <h3>William Haikio</h3>
+              <p><strong>Cinematographer</strong><br/>Visual storytelling through composition, frame, and motion.</p>
+              <p>amdal.william@photography.com</p>
+            </div>
+            <div class="card">
+              <h3>Wael Nassar</h3>
+              <p><strong>Actor / Writer</strong><br/>Versatile performance and narrative collaboration across genres.</p>
+              <p>hello@waelnassar.de</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="statement">
+        <div class="container">
+          <div class="card" style="padding:3rem; text-align:left;">
+            <p class="quote">
+              “This is not a studio. It is a confrontation with memory, myth, and collapse.”
+            </p>
+            <p class="hero-copy" style="margin-top:1rem; max-width:40rem;">
+              Apocalypse Theater exists at the intersection of classical narrative and modern fracture — where time is nonlinear, identity is unstable, and meaning is reconstructed through image, sound, and silence.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="latest">
+        <div class="container">
+          <div class="section-head">
+            <span class="eyebrow">Latest Work</span>
+            <h2>In development</h2>
+            <p>
+              A first sequence of cinematic experiments exploring memory, recursion, and psychological tension.
+            </p>
+          </div>
+
+          <div class="grid grid-3">
+            <div class="card">
+              <h3>Apocalypse Sequence I</h3>
+              <p>Short film concept exploring fragmented time, memory reconstruction, and emotional dissonance.</p>
+            </div>
+            <div class="card">
+              <h3>The €1 Hero</h3>
+              <p>A nonlinear narrative experiment blending myth, identity, and personalized storytelling.</p>
+            </div>
+            <div class="card">
+              <h3>My Apocalypse Theater</h3>
+              <p>Foundational cinematic framework — a developing universe of interconnected narratives.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer-row">
+        <span>© 2026 Apocalypse Theater</span>
+        <span>Built for cinema, philosophy, and future publication.</span>
+      </div>
+    </footer>
+  </body>
+</html>
 
