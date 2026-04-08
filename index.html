@@ -19,8 +19,6 @@
         --line: rgba(189, 205, 255, 0.45);
         --accent: #b9c4f0;
         --accent-strong: #9aa9e8;
-        --accent-soft: rgba(185, 196, 240, 0.14);
-        --gold-soft: #efecc9;
         --shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         --max: 1160px;
       }
@@ -56,10 +54,14 @@
         margin: 0 auto;
       }
 
+      section[id] {
+        scroll-margin-top: 110px;
+      }
+
       .site-header {
         position: sticky;
         top: 0;
-        z-index: 20;
+        z-index: 50;
         backdrop-filter: blur(12px);
         background: rgba(0, 0, 0, 0.9);
         border-bottom: 1px solid var(--line);
@@ -69,7 +71,22 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 1.3rem 0;
+        gap: 1rem;
+        padding: 1.25rem 0;
+      }
+
+      .brand-wrap {
+        display: flex;
+        align-items: center;
+      }
+
+      .brand-mark {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: conic-gradient(from 180deg, #7a1010, #1f2f8c, #7a1010);
+        margin-right: 0.8rem;
+        box-shadow: 0 0 24px rgba(70, 70, 140, 0.22);
       }
 
       .brand {
@@ -77,6 +94,12 @@
         font-size: clamp(1.4rem, 2.4vw, 2.1rem);
         font-weight: 700;
         color: var(--text);
+      }
+
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
       }
 
       .nav-links {
@@ -87,8 +110,34 @@
         font-size: 0.98rem;
       }
 
+      .nav-links a,
+      .nav-auth a {
+        transition: color 0.2s ease, transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      }
+
       .nav-links a:hover,
       .nav-links a:focus-visible {
+        color: var(--soft-text);
+        transform: translateY(-1px);
+      }
+
+      .nav-auth {
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+      }
+
+      .nav-auth a {
+        font-size: 0.92rem;
+        padding: 0.7rem 1rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+      }
+
+      .nav-auth a:hover,
+      .nav-auth a:focus-visible {
+        transform: translateY(-2px);
+        background: rgba(255, 255, 255, 0.04);
         color: var(--soft-text);
       }
 
@@ -96,7 +145,7 @@
         min-height: 92vh;
         display: grid;
         place-items: center;
-        padding: 4rem 0 4rem;
+        padding: 4rem 0;
       }
 
       .hero-card {
@@ -105,7 +154,6 @@
         border: 1px solid var(--line);
         background: linear-gradient(180deg, rgba(10, 10, 10, 0.96), rgba(7, 7, 7, 0.98));
         box-shadow: var(--shadow);
-        border-radius: 0;
         position: relative;
         overflow: hidden;
       }
@@ -162,6 +210,13 @@
         margin-bottom: 2rem;
       }
 
+      .quote {
+        font-size: clamp(1.8rem, 3vw, 2.6rem);
+        line-height: 1.25;
+        color: var(--text);
+        font-weight: 600;
+      }
+
       .hero-actions {
         display: flex;
         flex-wrap: wrap;
@@ -175,13 +230,14 @@
         border-radius: 999px;
         padding: 0.95rem 1.6rem;
         border: 1px solid var(--line);
-        transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease, color 0.22s ease, box-shadow 0.22s ease;
         font-weight: 700;
       }
 
       .button:hover,
       .button:focus-visible {
-        transform: translateY(-2px);
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
       }
 
       .button-primary {
@@ -206,136 +262,10 @@
         border-top: 1px solid var(--line);
       }
 
-      .section-head {
-        display: grid;
-        gap: 1rem;
-        margin-bottom: 2rem;
-      }
-
-      .section-head p {
-        margin: 0;
-        max-width: 44rem;
-        color: var(--muted);
-      }
-
-      .grid {
-        display: grid;
-        gap: 1.25rem;
-      }
-
-      .grid-3 {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
-      .card {
-        padding: 1.6rem;
-        background: var(--panel);
-        border: 1px solid var(--line);
-        border-radius: 0;
-        box-shadow: none;
-      }
-
-      .card h3 {
-        font-size: 1.25rem;
-        margin-bottom: 0.8rem;
-        color: var(--text);
-      }
-
-      .card p,
-      .list-item span {
-        margin: 0;
-        color: var(--muted);
-      }
-
-      .manifesto {
-        display: grid;
-        grid-template-columns: 1.2fr 0.8fr;
-        gap: 1.25rem;
-      }
-
-      .quote {
-        font-size: clamp(1.8rem, 3vw, 2.6rem);
-        line-height: 1.25;
-        color: var(--text);
-        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        font-weight: 600;
-      }
-
-      .list {
-        display: grid;
-        gap: 1rem;
-      }
-
-      .list-item {
-        padding-bottom: 1rem;
-        border-bottom: 1px solid var(--line);
-      }
-
-      .list-item:last-child {
-        border-bottom: 0;
-        padding-bottom: 0;
-      }
-
-      .list-item strong {
-        display: block;
-        margin-bottom: 0.35rem;
-        font-size: 1rem;
-        color: var(--soft-text);
-      }
-
-      .contact-box {
-        display: grid;
-        grid-template-columns: 1fr auto;
-        gap: 1rem;
-        align-items: center;
-      }
-
-      footer {
-        padding: 2rem 0 3rem;
-        color: var(--muted);
-        border-top: 1px solid var(--line);
-      }
-
-      .footer-row {
-        display: flex;
-        justify-content: space-between;
-        gap: 1rem;
-        flex-wrap: wrap;
-      }
-
-      @media (max-width: 900px) {
-        .grid-3,
-        .manifesto,
-        .contact-box {
-          grid-template-columns: 1fr;
-        }
-
-        .hero-card {
-          padding: 2rem;
-        }
-      }
-
-      @media (max-width: 640px) {
-        .nav {
-          align-items: flex-start;
-          gap: 1rem;
-          flex-direction: column;
-        }
-
-        .nav-links {
-          flex-wrap: wrap;
-          gap: 0.8rem 1rem;
-        }
-
-        h1 {
-          max-width: 100%;
-        }
-      }
-          .split {
+      .split {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        min-height: 520px;
-        border-top: 1px solid var(--line);
+        min-height: 560px;
       }
 
       .split-text {
@@ -373,29 +303,142 @@
         content: "";
         position: absolute;
         inset: 0;
-        background: linear-gradient(120deg, rgba(120,0,0,0.25), transparent 40%, rgba(0,0,120,0.25));
+        background: linear-gradient(120deg, rgba(120, 0, 0, 0.25), transparent 40%, rgba(0, 0, 120, 0.25));
         mix-blend-mode: overlay;
       }
 
-      .brand-mark {
-        width: 42px;
-        height: 42px;
-        border-radius: 50%;
-        background: conic-gradient(red, blue);
-        margin-right: 0.8rem;
+      .section-head {
+        display: grid;
+        gap: 1rem;
+        margin-bottom: 2rem;
       }
 
-      .brand-wrap {
+      .section-head p {
+        margin: 0;
+        max-width: 44rem;
+        color: var(--muted);
+      }
+
+      .grid {
+        display: grid;
+        gap: 1.25rem;
+      }
+
+      .grid-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .latest-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .card {
+        padding: 1.6rem;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        box-shadow: none;
+        transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+      }
+
+      .grid-3 .card:hover,
+      .grid-3 .card:focus-within,
+      .latest-grid .card:hover,
+      .latest-grid .card:focus-within {
+        transform: translateY(-8px);
+        border-color: rgba(239, 236, 201, 0.55);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.24);
+      }
+
+      .card h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.8rem;
+        color: var(--text);
+      }
+
+      .card p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .open-role {
+        border-style: dashed;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.015), rgba(255, 255, 255, 0.025));
+      }
+
+      .open-role h3 {
+        color: var(--soft-text);
+      }
+
+      .feedback-button {
+        position: fixed;
+        right: 1.4rem;
+        bottom: 1.4rem;
+        z-index: 60;
+        padding: 0.95rem 1.2rem;
+        border-radius: 999px;
+        border: 1px solid rgba(239, 236, 201, 0.45);
+        background: rgba(6, 6, 6, 0.92);
+        color: var(--soft-text);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.34);
+        transition: transform 0.2s ease, background 0.2s ease;
+      }
+
+      .feedback-button:hover,
+      .feedback-button:focus-visible {
+        transform: translateY(-3px);
+        background: rgba(18, 18, 18, 0.98);
+      }
+
+      footer {
+        padding: 2rem 0 3rem;
+        color: var(--muted);
+        border-top: 1px solid var(--line);
+      }
+
+      .footer-row {
         display: flex;
-        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
       }
 
-      @media (max-width: 900px) {
+      @media (max-width: 980px) {
+        .grid-3,
+        .latest-grid,
         .split {
           grid-template-columns: 1fr;
         }
-        .split-text {
+
+        .split-text,
+        .hero-card {
           padding: 2rem;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .nav {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .nav-right {
+          width: 100%;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .nav-links,
+        .nav-auth {
+          flex-wrap: wrap;
+        }
+
+        h1 {
+          max-width: 100%;
+        }
+
+        .feedback-button {
+          right: 1rem;
+          bottom: 1rem;
         }
       }
     </style>
@@ -403,12 +446,21 @@
   <body>
     <header class="site-header">
       <div class="container nav">
-        <div class="brand-wrap"><div class="brand-mark"></div><a href="#top" class="brand">Apocalypse Theater</a></div>
-        <nav class="nav-links" aria-label="Primary">
-          <a href="#mission">Mission</a>
-          <a href="#philosophy">Philosophy</a>
-          <a href="#contact">Contact</a>
-        </nav>
+        <div class="brand-wrap">
+          <div class="brand-mark"></div>
+          <a href="#top" class="brand">Apocalypse Theater</a>
+        </div>
+        <div class="nav-right">
+          <nav class="nav-links" aria-label="Primary">
+            <a href="#mission">Mission</a>
+            <a href="#philosophy">Philosophy</a>
+            <a href="#contact">Contact</a>
+          </nav>
+          <div class="nav-auth" aria-label="Account access">
+            <a href="#">Login</a>
+            <a href="#">Sign Up</a>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -418,10 +470,10 @@
           <div class="hero-card">
             <span class="eyebrow">Cinema · Myth · Memory · Prophecy</span>
             <h1>Apocalypse Theater</h1>
-            <p class="quote" style="margin-bottom:1.5rem; max-width:28rem;">
+            <p class="quote" style="margin-bottom: 1.5rem; max-width: 28rem;">
               Cinema doesn't only reveal. It reconstructs reality.
             </p>
-            <p class="hero-copy" style="max-width:26rem;">
+            <p class="hero-copy" style="max-width: 26rem;">
               Seize your mind | Pierce your heart | Regain your soul
             </p>
             <div class="hero-actions">
@@ -432,27 +484,25 @@
         </div>
       </section>
 
-      <section class="split">
+      <section class="split" id="mission">
         <div class="split-text">
           <span class="eyebrow">Our Vision</span>
           <h2>Founder’s Inspiration</h2>
           <p>
-            Apocalypse Theater emerges from the fusion of classical narrative, nonlinear structure, and sound-driven cinema. As a new cinematic language of mood, tension, and intuition — where image, music, and silence construct meaning beyond linear form.
+            Apocalypse Theater emerges from classical narrative, nonlinear structure, and sound-driven cinema — a cinematic language of mood, tension, intuition, image, music, and silence.
           </p>
         </div>
         <div class="split-image">
-          <img src="https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?q=80&w=1400&auto=format&fit=crop" alt="cinema black and white" />
+          <img src="https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?q=80&w=1400&auto=format&fit=crop" alt="Black and white cinematic still" />
         </div>
       </section>
 
-      <section id="mission">
+      <section id="vision-statement">
         <div class="container">
           <div class="section-head">
-            <span class="eyebrow">Our Vision</span>
-            <h2>Founder’s Inspiration</h2>
-            <p>
-              A cinematic language shaped by myth, sound, and nonlinear time. Meaning is not delivered — it is rediscovered.
-            </p>
+            <span class="eyebrow">Manifesto</span>
+            <h2>Meaning is not delivered. It is rediscovered.</h2>
+            <p>Myth. Sound. Nonlinear time. Cinema as reconstruction.</p>
           </div>
         </div>
       </section>
@@ -467,21 +517,15 @@
           <div class="grid grid-3">
             <article class="card">
               <h3>Movie Soundscapes</h3>
-              <p>
-                Immersive, emotionally precise sound design that elevates narrative depth and atmosphere.
-              </p>
+              <p>Immersive, emotionally precise sound design that elevates narrative depth and atmosphere.</p>
             </article>
             <article class="card">
               <h3>Short Films</h3>
-              <p>
-                End-to-end cinematic storytelling — from concept and script to production and final edit.
-              </p>
+              <p>End-to-end cinematic storytelling — from concept and script to production and final edit.</p>
             </article>
             <article class="card">
               <h3>Movie Trailers</h3>
-              <p>
-                High-impact visual storytelling for brands and narratives that demand attention and memory.
-              </p>
+              <p>High-impact visual storytelling for brands and narratives that demand attention and memory.</p>
             </article>
           </div>
         </div>
@@ -492,16 +536,22 @@
           <div class="section-head">
             <span class="eyebrow">Team</span>
             <h2>Built through collaboration, driven by vision.</h2>
-            <p>
-              A convergence of vision, craft, and cinematic intuition.
-            </p>
+            <p>A convergence of vision, craft, and cinematic intuition.</p>
           </div>
 
           <div class="grid grid-3">
             <div class="card">
               <h3>Rodrigo Mendez</h3>
-              <p><strong>Founder / Writer</strong><br/>Vision-led storytelling shaped by philosophy, cinema, and dreams</p>
-              <p>Contact: rodxgomendz@outlook.com</p>
+              <p><strong>Founder / Writer</strong><br />Vision-led storytelling shaped by philosophy, cinema, and dreams.</p>
+              <p>Contact: <a href="mailto:rodxgomendez@outlook.com">rodxgomendez@outlook.com</a></p>
+            </div>
+            <div class="card open-role">
+              <h3>Open Collaboration</h3>
+              <p><strong>Cinematographer</strong><br />Seeking visual collaborators with a cinematic eye for mood, texture, and symbolic framing.</p>
+            </div>
+            <div class="card open-role">
+              <h3>Open Collaboration</h3>
+              <p><strong>Editor</strong><br />Seeking editors drawn to rhythm, nonlinear construction, and emotionally precise cuts.</p>
             </div>
           </div>
         </div>
@@ -509,11 +559,9 @@
 
       <section id="statement">
         <div class="container">
-          <div class="card" style="padding:3rem; text-align:left;">
-            <p class="quote">
-              “This is not a studio. It is a confrontation with memory, myth, and collapse.”
-            </p>
-            <p class="hero-copy" style="margin-top:1rem; max-width:40rem;">
+          <div class="card" style="padding: 3rem; text-align: left;">
+            <p class="quote">“This is not a studio. It is a confrontation with memory, myth, and collapse.”</p>
+            <p class="hero-copy" style="margin-top: 1rem; max-width: 40rem;">
               Apocalypse Theater exists at the intersection of classical narrative and modern fracture — where time is nonlinear, identity is unstable, and meaning is reconstructed through image, sound, and silence.
             </p>
           </div>
@@ -525,58 +573,45 @@
           <div class="section-head">
             <span class="eyebrow">Latest Work</span>
             <h2>In development</h2>
-            <p>
-              A first sequence of cinematic experiments exploring memory, myth, and psychological tension.
-            </p>
+            <p>A first sequence of cinematic experiments exploring memory, myth, and psychological tension.</p>
           </div>
-          <div class="grid grid-9">
-            <div class="grid grid-9">
 
-<div class="card">
-  <h3>Unknown Archetype</h3>
-  <p>After a neural simulation fractures his memory and sense of self, an AI ethicist drifts through collapsing timelines, where protection turns into annihilation.</p>
-</div> 
-              
-  <div class="card">
-    <h3>Regensburg</h3>
-    <p>A returning student relives intertwined love stories from abroad as memory, premonition, and collective anxiety blur into an impending rupture.</p>
-  </div>
-
-  <div class="card">
-    <h3>New Social Order</h3>
-    <p>Across cities and shifting ideologies, a young man searches for identity and intimacy as political tension and personal disillusionment quietly converge.</p>
-  </div>
-
-  <div class="card">
-    <h3>Rubatosis</h3>
-    <p>After a cosmic encounter alters her mind and body, a physicist begins to perceive time, emotion, and reality as unstable frequencies.</p>
-  </div>
-
-  <div class="card">
-    <h3>Downstream & West</h3>
-    <p>An amnesiac outlaw wanders a fractured West, chasing vengeance and identity as memory, masculinity, and loyalty collapse into myth.</p>
-  </div>
-
-  <div class="card">
-    <h3>Ocean Castle</h3>
-    <p>A dying informant ascends a criminal empire while love, betrayal, and exile entangle in a final attempt at escape.</p>
-  </div>
-
-  <div class="card">
-    <h3>La Rosa Blanca</h3>
-    <p>A politician’s search for truth unravels into a reverse-told tragedy of love, violence, and the quiet tyranny of memory.</p>
-  </div>
-
-  <div class="card">
-    <h3>Eye of an Eclipse</h3>
-    <p>After betrayal fractures a covert mission, a fugitive agent follows a cryptic trail across Europe as unseen forces close in.</p>
-  </div>
-
-  <div class="card">
-    <h3>Ozymandias’ Mirror</h3>
-    <p>A deep-space mission to recover a lost signal reveals a reality where time bends inward and existence begins to question itself.</p>
-  </div>
-
+          <div class="grid latest-grid">
+            <div class="card">
+              <h3>Unknown Archetype</h3>
+              <p>After a neural simulation fractures his memory and sense of self, an AI ethicist drifts through collapsing timelines, where protection turns into annihilation.</p>
+            </div>
+            <div class="card">
+              <h3>Regensburg</h3>
+              <p>A returning student relives intertwined love stories from abroad as memory, premonition, and collective anxiety blur into an impending rupture.</p>
+            </div>
+            <div class="card">
+              <h3>New Social Order</h3>
+              <p>Across cities and shifting ideologies, a young man searches for identity and intimacy as political tension and personal disillusionment quietly converge.</p>
+            </div>
+            <div class="card">
+              <h3>Rubatosis</h3>
+              <p>After a cosmic encounter alters her mind and body, a physicist begins to perceive time, emotion, and reality as unstable frequencies.</p>
+            </div>
+            <div class="card">
+              <h3>Downstream &amp; West</h3>
+              <p>An amnesiac outlaw wanders a fractured West, chasing vengeance and identity as memory, masculinity, and loyalty collapse into myth.</p>
+            </div>
+            <div class="card">
+              <h3>Ocean Castle</h3>
+              <p>A dying informant ascends a criminal empire while love, betrayal, and exile entangle in a final attempt at escape.</p>
+            </div>
+            <div class="card">
+              <h3>La Rosa Blanca</h3>
+              <p>A politician’s search for truth unravels into a reverse-told tragedy of love, violence, and the quiet tyranny of memory.</p>
+            </div>
+            <div class="card">
+              <h3>Eye of an Eclipse</h3>
+              <p>After betrayal fractures a covert mission, a fugitive agent follows a cryptic trail across Europe as unseen forces close in.</p>
+            </div>
+            <div class="card">
+              <h3>Ozymandias’ Mirror</h3>
+              <p>A deep-space mission to recover a lost signal reveals a reality where time bends inward and existence begins to question itself.</p>
             </div>
           </div>
         </div>
@@ -586,15 +621,17 @@
     <footer>
       <div class="container footer-row">
         <div>
-          <span>© 2026 Apocalypse Theater</span><br/>
+          <span>© 2026 Apocalypse Theater</span><br />
           <span>Built for cinema, philosophy, and future publication.</span>
         </div>
         <div>
-          <span>Email: <a href="mailto:rodxgomendez@outlook.com">rodxgomendez@outlook.com</a></span><br/>
-          <span>Instagram: <a href="https://www.instagram.com/apocalypsetheater/" target="_blank">@apocalypsetheater</a></span><br/>
+          <span>Email: <a href="mailto:rodxgomendez@outlook.com">rodxgomendez@outlook.com</a></span><br />
+          <span>Instagram: <a href="https://www.instagram.com/apocalypsetheater/" target="_blank">@apocalypsetheater</a></span><br />
           <span>LinkedIn: <a href="https://www.linkedin.com/company/apocalypse-theater/" target="_blank">Apocalypse Theater</a></span>
         </div>
       </div>
     </footer>
+
+    <a class="feedback-button" href="mailto:rodxgomendez@outlook.com?subject=Apocalypse%20Theater%20Feedback">Request / Feedback</a>
   </body>
 </html>
