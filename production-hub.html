@@ -1,72 +1,4 @@
 <!DOCTYPE html>
-            <h3>Cinematography</h3>
-            <p>Scene framing, movement, symbolic imagery, transitions, visual contrast, and location-based shooting.</p>
-          </div>
-
-          <div class="card">
-            <h3>Set Design</h3>
-            <p>Lighting, props, rooms, environments, city textures, and atmosphere shaping the visual language.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="remote">
-      <div class="container">
-        <span class="eyebrow">Remote Collaboration</span>
-        <h2>Creative work developed remotely.</h2>
-
-        <div class="grid grid-3">
-          <div class="card">
-            <h3>Screenwriting</h3>
-            <p>Nonlinear storytelling, emotional structure, dialogue writing, symbolism, and mythic narrative development.</p>
-          </div>
-
-          <div class="card">
-            <h3>Music Composition</h3>
-            <p>Experimental sound design inspired by Hans Zimmer, Ludwig Göransson, Ennio Morricone, Carlos Santana, and cinematic western soundscapes.</p>
-          </div>
-
-          <div class="card">
-            <h3>Editing & Storyboarding</h3>
-            <p>Visual sequencing, emotional cuts, transitions, mood boarding, and cinematic pacing.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects">
-      <div class="container">
-        <span class="eyebrow">Projects In Development</span>
-        <h2>Current cinematic worlds.</h2>
-
-        <div class="grid grid-3">
-          <div class="card">
-            <h3>Regensburg</h3>
-            <p>A returning student relives intertwined love stories from abroad as memory and anxiety blur into rupture.</p>
-          </div>
-
-          <div class="card">
-            <h3>Rubatosis</h3>
-            <p>A physicist begins perceiving reality as unstable frequencies after a cosmic encounter alters her consciousness.</p>
-          </div>
-
-          <div class="card">
-            <h3>Unknown Archetype</h3>
-            <p>An AI ethicist drifts through collapsing timelines after a neural simulation fractures memory and identity.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <p>© 2026 Apocalypse Theater — Production Hub</p>
-    </div>
-  </footer>
-</body>
-</html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -75,15 +7,11 @@
 
   <style>
     :root {
-      --bg: #020202;
       --panel: #0b0b0b;
-      --panel-soft: #111111;
       --text: #dbe3ff;
       --muted: #b7c2e8;
       --soft-text: #f4efcf;
       --line: rgba(189, 205, 255, 0.35);
-      --accent: #b9c4f0;
-      --accent-strong: #9aa9e8;
       --red: #7a1010;
       --blue: #1f2f8c;
       --max: 1160px;
@@ -100,13 +28,18 @@
 
     body {
       margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: Inter, Arial, sans-serif;
       background:
         radial-gradient(circle at top left, rgba(122, 16, 16, 0.18), transparent 34%),
         radial-gradient(circle at top right, rgba(31, 47, 140, 0.18), transparent 38%),
         linear-gradient(180deg, #000 0%, #050505 55%, #020202 100%);
       color: var(--text);
       line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
     .container {
@@ -149,8 +82,18 @@
       font-size: clamp(1.3rem, 2vw, 2rem);
       font-weight: 800;
       letter-spacing: -0.04em;
+      white-space: nowrap;
     }
 
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+      color: var(--muted);
+    }
+
+    .nav-links a,
     .member-badge {
       border: 1px solid rgba(244, 239, 207, 0.45);
       color: var(--soft-text);
@@ -281,29 +224,10 @@
       transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
     }
 
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top left, rgba(185, 196, 240, 0.1), transparent 42%);
-      opacity: 0;
-      transition: opacity 0.35s ease;
-      pointer-events: none;
-    }
-
     .card:hover {
       transform: translateY(-8px) scale(1.015);
       border-color: rgba(244, 239, 207, 0.58);
       box-shadow: 0 22px 48px rgba(0, 0, 0, 0.35);
-    }
-
-    .card:hover::before {
-      opacity: 1;
-    }
-
-    .card > * {
-      position: relative;
-      z-index: 2;
     }
 
     .tag {
@@ -366,6 +290,10 @@
         align-items: flex-start;
         flex-direction: column;
       }
+
+      .nav-links {
+        align-items: flex-start;
+      }
     }
   </style>
 </head>
@@ -375,8 +303,16 @@
     <div class="container nav">
       <div class="brand-wrap">
         <div class="brand-mark"></div>
-        <div class="brand">Apocalypse Theater</div>
+        <a href="index.html" class="brand">Apocalypse Theater</a>
       </div>
+
+      <nav class="nav-links">
+        <a href="index.html">Main Site</a>
+        <a href="#physical">Physical Production</a>
+        <a href="#remote">Remote Collaboration</a>
+        <a href="#projects">Projects</a>
+      </nav>
+
       <div class="member-badge">Members Production Hub</div>
     </div>
   </header>
@@ -392,14 +328,14 @@
               A hidden architecture for building cinema through cities, sound, memory, and collaboration.
             </p>
             <p class="lead">
-              This members-only space is designed for collaborators who want to help develop, shoot, perform, compose, edit, and build the emerging cinematic universe of Apocalypse Theater.
+              This members space is designed for collaborators who want to help develop, shoot, perform, compose, edit, and build the emerging cinematic universe of Apocalypse Theater.
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <section>
+    <section id="mission">
       <div class="container">
         <div class="section-head">
           <span class="eyebrow">Mission</span>
@@ -431,49 +367,71 @@
       </div>
     </section>
 
-    <section>
+    <section id="physical">
       <div class="container">
         <div class="section-head">
-          <span class="eyebrow">Collaboration Model</span>
-          <h2>Two ways to build the films.</h2>
+          <span class="eyebrow">Physical Production</span>
+          <h2>In-person cinematic production.</h2>
           <p>
-            Some parts of cinema must happen physically: camera, actor, location, body, light, weather, city, nature. Other parts can develop remotely over weeks: writing, planning, editing, sound, mood, and structure.
+            These roles are focused on shooting days, location-based scenes, acting, camera work, set design, movement, blocking, light, and real-world production.
           </p>
         </div>
 
-        <div class="grid grid-2">
+        <div class="grid grid-3">
           <div class="card">
-            <span class="tag">In Person</span>
-            <h3>Physical Production</h3>
-            <p>
-              For shooting days, acting, cinematography, set design, city scenes, nature scenes, dialogue, blocking, movement, lighting, and location-based collaboration.
-            </p>
-            <p>
-              This is for people who can be physically present in a city for a filming day, weekend, or short production window.
-            </p>
+            <h3>Acting</h3>
+            <p>Dialogue, movement, emotional tension, protagonist and antagonist performances during shooting days or production weekends.</p>
           </div>
 
           <div class="card">
-            <span class="tag">Remote</span>
-            <h3>Creative Development</h3>
-            <p>
-              For screenwriting, synopsis development, storyboarding, mood boarding, editing concepts, music composition, sound design, visual references, and production planning.
-            </p>
-            <p>
-              This is for collaborators who can work from their own studio, home, university, or creative environment over several days or weeks.
-            </p>
+            <h3>Cinematography</h3>
+            <p>Scene framing, movement, symbolic imagery, transitions, visual contrast, and location-based shooting.</p>
+          </div>
+
+          <div class="card">
+            <h3>Set Design</h3>
+            <p>Lighting, props, rooms, environments, city textures, and atmosphere shaping the visual language.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section>
+    <section id="remote">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Remote Collaboration</span>
+          <h2>Creative work developed remotely.</h2>
+          <p>
+            These roles can be developed from anywhere over days, weeks, or a full month depending on the project’s scope.
+          </p>
+        </div>
+
+        <div class="grid grid-3">
+          <div class="card">
+            <h3>Screenwriting</h3>
+            <p>Nonlinear storytelling, emotional structure, dialogue writing, symbolism, and mythic narrative development.</p>
+          </div>
+
+          <div class="card">
+            <h3>Music Composition</h3>
+            <p>Experimental sound design inspired by Hans Zimmer, Ludwig Göransson, Ennio Morricone, Carlos Santana, and cinematic western soundscapes.</p>
+          </div>
+
+          <div class="card">
+            <h3>Editing & Storyboarding</h3>
+            <p>Visual sequencing, emotional cuts, transitions, mood boarding, and cinematic pacing.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="capabilities">
       <div class="container">
         <div class="section-head">
           <span class="eyebrow">Current Capabilities</span>
           <h2>What already exists.</h2>
           <p>
-            Apocalypse Theater is not starting from zero. The foundation already includes story concepts, project synopses, mood boards, early storyboards, cinematography experiments, transitions, and a growing visual language.
+            Apocalypse Theater already includes story concepts, project synopses, mood boards, early storyboards, cinematography experiments, transitions, and a growing visual language.
           </p>
         </div>
 
@@ -485,33 +443,33 @@
 
           <div class="card">
             <h3>Mood Boarding</h3>
-            <p>Each project is being shaped through color, contrast, texture, atmosphere, references, locations, and emotional palettes.</p>
+            <p>Each project is shaped through color, contrast, texture, atmosphere, references, locations, and emotional palettes.</p>
           </div>
 
           <div class="card">
             <h3>Storyboarding</h3>
-            <p>Scenes are being translated into visual sequences, symbolic frames, transitions, and cinematic movement.</p>
+            <p>Scenes are translated into visual sequences, symbolic frames, transitions, and cinematic movement.</p>
           </div>
 
           <div class="card">
             <h3>Cinematography Tests</h3>
-            <p>Early visual experiments are being developed around framing, shadow, distance, memory, city movement, and natural landscapes.</p>
+            <p>Early visual experiments explore framing, shadow, distance, memory, city movement, and natural landscapes.</p>
           </div>
 
           <div class="card">
             <h3>Transitions</h3>
-            <p>Nonlinear transitions are being explored as emotional cuts between memory, dream, premonition, and reality.</p>
+            <p>Nonlinear transitions are explored as emotional cuts between memory, dream, premonition, and reality.</p>
           </div>
 
           <div class="card">
             <h3>Sound Direction</h3>
-            <p>Music and sound are being treated as narrative engines, not background decoration.</p>
+            <p>Music and sound are treated as narrative engines, not background decoration.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section>
+    <section id="sound">
       <div class="container">
         <div class="section-head">
           <span class="eyebrow">Sound Philosophy</span>
@@ -525,11 +483,9 @@
           <div class="card">
             <h3>Remote Music Composition</h3>
             <p>
-              Musicians can work remotely from their own studios to create original compositions, motifs, textures, rhythms, and transitions over a timeline of several weeks to one month.
+              Musicians can work remotely from their own studios to create original compositions, motifs, textures, rhythms, and transitions over several weeks or one month.
             </p>
-            <p>
-              The goal is not generic scoring. The goal is emotional architecture.
-            </p>
+            <p>The goal is not generic scoring. The goal is emotional architecture.</p>
           </div>
 
           <div class="card">
@@ -537,9 +493,7 @@
             <p>
               Especially welcome: woodwinds, drums, guitar, synthesizer, piano, percussion, ambient textures, field recordings, distorted rhythm, silence, and hybrid acoustic-electronic sound.
             </p>
-            <p>
-              The sound should feel cinematic, mythic, unstable, and alive.
-            </p>
+            <p>The sound should feel cinematic, mythic, unstable, and alive.</p>
           </div>
         </div>
 
@@ -551,7 +505,7 @@
       </div>
     </section>
 
-    <section>
+    <section id="lineage">
       <div class="container">
         <div class="section-head">
           <span class="eyebrow">Creative Lineage</span>
@@ -583,7 +537,7 @@
       </div>
     </section>
 
-    <section>
+    <section id="roles">
       <div class="container">
         <div class="section-head">
           <span class="eyebrow">Open Collaboration Roles</span>
@@ -642,7 +596,7 @@
       </div>
     </section>
 
-    <section>
+    <section id="projects">
       <div class="container">
         <div class="section-head">
           <span class="eyebrow">Projects in Development</span>
@@ -710,7 +664,7 @@
       </div>
     </section>
 
-    <section>
+    <section id="cities">
       <div class="container">
         <div class="section-head">
           <span class="eyebrow">City-Based Production</span>
@@ -739,7 +693,7 @@
       </div>
     </section>
 
-    <section>
+    <section id="request">
       <div class="container">
         <div class="divider-statement">
           <span class="eyebrow">Production Ethos</span>
@@ -750,12 +704,8 @@
             Both forms of collaboration matter. Apocalypse Theater is built for people who cannot give everything, but can still give something precise, beautiful, and unforgettable.
           </p>
         </div>
-      </div>
-    </section>
 
-    <section>
-      <div class="container">
-        <div class="section-head">
+        <div class="section-head" style="margin-top: 4rem;">
           <span class="eyebrow">Request to Help</span>
           <h2>How members can join a project.</h2>
           <p>
@@ -791,8 +741,10 @@
   <footer>
     <div class="container">
       <p>© 2026 Apocalypse Theater · Members Production Hub</p>
-      <p>This page is intended as a private concept space for collaborators and production development.</p>
+      <p>This page is intended as a concept space for collaborators and production development.</p>
     </div>
   </footer>
 </body>
 </html>
+```
+
