@@ -1,81 +1,4 @@
 <!DOCTYPE html>
-    </section>
-    <section class="split" id="mission">
-      <div class="split-text">
-        <span class="eyebrow">Our Vision</span>
-        <h2>Founder’s Inspiration</h2>
-        <p>
-          Apocalypse Theater emerges from classical narrative, nonlinear structure, and sound-driven cinema — a cinematic language of tension, intuition, image, music, and silence.
-        </p>
-      </div>
-
-      <div class="split-image"></div>
-    </section>
-
-    <section id="philosophy">
-      <div class="container">
-        <span class="eyebrow">Manifesto</span>
-        <h2>Meaning is not delivered. It is rediscovered.</h2>
-        <p>Myth. Sound. Nonlinear time. Cinema as reconstruction.</p>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="container">
-        <span class="eyebrow">Open Collaboration</span>
-        <h2>Built through collaboration, driven by vision.</h2>
-
-        <div class="grid grid-3">
-          <div class="card">
-            <h3>Rodrigo Mendez</h3>
-            <p><strong>Founder / Writer</strong><br />Vision-led storytelling shaped by philosophy, cinema, and dreams.</p>
-          </div>
-
-          <div class="card open-role">
-            <h3>Open Collaboration</h3>
-            <p><strong>Cinematographer</strong><br />Seeking visual collaborators with a cinematic eye for mood and symbolic framing.</p>
-          </div>
-
-          <div class="card open-role">
-            <h3>Open Collaboration</h3>
-            <p><strong>Music Composer</strong><br />Seeking musicians to create soundscapes and narrative-driven compositions.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container footer-row">
-      <div>
-        <span>© 2026 Apocalypse Theater</span><br />
-        <span>Visitors: <span id="visit-counter"></span></span>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    let visits = localStorage.getItem("apocalypse_visits") || 0;
-
-    visits = parseInt(visits) + 1;
-
-    localStorage.setItem("apocalypse_visits", visits);
-
-    const counter = document.getElementById("visit-counter");
-
-    let current = 0;
-
-    const interval = setInterval(() => {
-      current++;
-      counter.innerText = current;
-
-      if (current >= visits) {
-        clearInterval(interval);
-      }
-    }, 35);
-  </script>
-</body>
-</html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -113,6 +36,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 2rem;
       padding: 1.2rem 0;
     }
 
@@ -120,12 +44,40 @@
       font-size: 1.7rem;
       font-weight: 700;
       color: #dbe3ff;
+      white-space: nowrap;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
     }
 
     .nav-links {
       display: flex;
       gap: 1rem;
       color: #b7c2e8;
+      flex-wrap: wrap;
+    }
+
+    .nav-auth {
+      display: flex;
+      gap: 0.8rem;
+    }
+
+    .nav-auth a {
+      padding: 0.65rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(189, 205, 255, 0.35);
+      font-size: 0.9rem;
+    }
+
+    .nav-auth .signup {
+      background: #b9c4f0;
+      color: #050505;
+      font-weight: 700;
+      border-color: #b9c4f0;
     }
 
     section {
@@ -199,6 +151,7 @@
       background: #b9c4f0;
       color: #050505;
       border-color: #b9c4f0;
+      font-weight: 700;
     }
 
     .grid {
@@ -291,8 +244,9 @@
         flex-direction: column;
       }
 
-      .nav-links {
-        flex-wrap: wrap;
+      .nav-right {
+        align-items: flex-start;
+        flex-direction: column;
       }
     }
   </style>
@@ -302,11 +256,20 @@
   <header>
     <div class="container nav">
       <a href="#top" class="brand">Apocalypse Theater</a>
-      <nav class="nav-links">
-        <a href="#mission">Mission</a>
-        <a href="#philosophy">Philosophy</a>
-        <a href="#contact">Contact</a>
-      </nav>
+
+      <div class="nav-right">
+        <nav class="nav-links">
+          <a href="#mission">Mission</a>
+          <a href="#philosophy">Philosophy</a>
+          <a href="#contact">Contact</a>
+          <a href="productionhub.html">Production Hub</a>
+        </nav>
+
+        <div class="nav-auth">
+          <a href="#">Login</a>
+          <a href="#" class="signup">Sign Up</a>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -334,7 +297,7 @@
       <div class="split-image"></div>
     </section>
 
-    <section id="vision-statement">
+    <section id="philosophy">
       <div class="container">
         <span class="eyebrow">Manifesto</span>
         <h2>Meaning is not delivered. It is rediscovered.</h2>
@@ -342,7 +305,7 @@
       </div>
     </section>
 
-    <section id="philosophy">
+    <section id="offerings">
       <div class="container">
         <span class="eyebrow">Our Offerings</span>
         <h2>Cinematic production across sound, story, and visual language.</h2>
@@ -478,7 +441,8 @@
     <div class="container footer-row">
       <div>
         <span>© 2026 Apocalypse Theater</span><br />
-        <span>Built for cinema, philosophy, and future publication.</span>
+        <span>Built for cinema, philosophy, and future publication.</span><br />
+        <span>Visitors: <span id="visit-counter">0</span></span>
       </div>
 
       <div>
@@ -490,5 +454,25 @@
   </footer>
 
   <a class="feedback-button" href="mailto:rodxgomendez@outlook.com?subject=Apocalypse%20Theater%20Feedback">Request / Feedback</a>
+
+  <script>
+    let visits = localStorage.getItem("apocalypse_visits") || 0;
+    visits = parseInt(visits) + 1;
+    localStorage.setItem("apocalypse_visits", visits);
+
+    const counter = document.getElementById("visit-counter");
+    let current = 0;
+
+    const interval = setInterval(() => {
+      current++;
+      counter.innerText = current;
+
+      if (current >= visits) {
+        clearInterval(interval);
+      }
+    }, 35);
+  </script>
 </body>
 </html>
+```
+
