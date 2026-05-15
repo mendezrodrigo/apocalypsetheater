@@ -1,4 +1,81 @@
 <!DOCTYPE html>
+    </section>
+    <section class="split" id="mission">
+      <div class="split-text">
+        <span class="eyebrow">Our Vision</span>
+        <h2>Founder’s Inspiration</h2>
+        <p>
+          Apocalypse Theater emerges from classical narrative, nonlinear structure, and sound-driven cinema — a cinematic language of tension, intuition, image, music, and silence.
+        </p>
+      </div>
+
+      <div class="split-image"></div>
+    </section>
+
+    <section id="philosophy">
+      <div class="container">
+        <span class="eyebrow">Manifesto</span>
+        <h2>Meaning is not delivered. It is rediscovered.</h2>
+        <p>Myth. Sound. Nonlinear time. Cinema as reconstruction.</p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <span class="eyebrow">Open Collaboration</span>
+        <h2>Built through collaboration, driven by vision.</h2>
+
+        <div class="grid grid-3">
+          <div class="card">
+            <h3>Rodrigo Mendez</h3>
+            <p><strong>Founder / Writer</strong><br />Vision-led storytelling shaped by philosophy, cinema, and dreams.</p>
+          </div>
+
+          <div class="card open-role">
+            <h3>Open Collaboration</h3>
+            <p><strong>Cinematographer</strong><br />Seeking visual collaborators with a cinematic eye for mood and symbolic framing.</p>
+          </div>
+
+          <div class="card open-role">
+            <h3>Open Collaboration</h3>
+            <p><strong>Music Composer</strong><br />Seeking musicians to create soundscapes and narrative-driven compositions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <div>
+        <span>© 2026 Apocalypse Theater</span><br />
+        <span>Visitors: <span id="visit-counter"></span></span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    let visits = localStorage.getItem("apocalypse_visits") || 0;
+
+    visits = parseInt(visits) + 1;
+
+    localStorage.setItem("apocalypse_visits", visits);
+
+    const counter = document.getElementById("visit-counter");
+
+    let current = 0;
+
+    const interval = setInterval(() => {
+      current++;
+      counter.innerText = current;
+
+      if (current >= visits) {
+        clearInterval(interval);
+      }
+    }, 35);
+  </script>
+</body>
+</html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
