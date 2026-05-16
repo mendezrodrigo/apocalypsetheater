@@ -4,37 +4,52 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Apocalypse Theater | Production Hub</title>
+  <meta name="description" content="Apocalypse Theater Production Hub — a private development space for collaborators across Europe." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
 
   <style>
     :root {
-      --panel: #0b0b0b;
-      --text: #dbe3ff;
-      --muted: #b7c2e8;
+      --panel:     #0b0b0b;
+      --text:      #dbe3ff;
+      --muted:     #b7c2e8;
       --soft-text: #f4efcf;
-      --line: rgba(189, 205, 255, 0.35);
-      --red: #7a1010;
-      --blue: #1f2f8c;
-      --max: 1160px;
-      --shadow: 0 25px 70px rgba(0, 0, 0, 0.55);
+      --line:      rgba(189, 205, 255, 0.28);
+      --line-warm: rgba(244, 239, 207, 0.28);
+      --red:       #7a1010;
+      --blue:      #1f2f8c;
+      --max:       1160px;
+      --shadow:    0 25px 70px rgba(0, 0, 0, 0.55);
+      --ease:      cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; }
 
-    html {
-      scroll-behavior: smooth;
+    html { scroll-behavior: smooth; }
+
+    /* ── Grain texture ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.032;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
     }
 
     body {
       margin: 0;
-      font-family: Inter, Arial, sans-serif;
+      font-family: 'Inter', Arial, sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(122, 16, 16, 0.18), transparent 34%),
-        radial-gradient(circle at top right, rgba(31, 47, 140, 0.18), transparent 38%),
+        radial-gradient(ellipse at top left,  rgba(122, 16, 16, 0.16), transparent 36%),
+        radial-gradient(ellipse at top right, rgba(31, 47, 140, 0.16), transparent 38%),
         linear-gradient(180deg, #000 0%, #050505 55%, #020202 100%);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.65;
+      overflow-x: hidden;
     }
 
     a {
@@ -83,7 +98,9 @@
       font-weight: 800;
       letter-spacing: -0.04em;
       white-space: nowrap;
+      transition: opacity 0.2s ease;
     }
+    .brand:hover { opacity: 0.75; }
 
     .nav-links {
       display: flex;
@@ -163,28 +180,37 @@
       background: var(--soft-text);
     }
 
-    h1, h2, h3 {
-      margin: 0;
-      line-height: 1.05;
-    }
+    h1, h2, h3 { line-height: 1.05; }
 
     h1 {
       font-size: clamp(3rem, 7vw, 5.8rem);
       max-width: 11ch;
-      margin-bottom: 1.2rem;
+      margin: 0 0 1.2rem;
       letter-spacing: -0.06em;
+      font-weight: 800;
     }
 
     h2 {
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      margin-bottom: 1rem;
+      font-size: clamp(1.9rem, 4vw, 3.2rem);
+      margin: 0 0 1rem;
       letter-spacing: -0.04em;
+      font-weight: 700;
     }
 
     h3 {
-      font-size: 1.25rem;
-      margin-bottom: 0.75rem;
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin: 0 0 0.65rem;
     }
+
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
+    }
+    .reveal.in-view { opacity: 1; transform: none; }
 
     p {
       color: var(--muted);
@@ -225,16 +251,30 @@
     .card {
       background: linear-gradient(180deg, rgba(14, 14, 14, 0.96), rgba(8, 8, 8, 0.98));
       border: 1px solid var(--line);
-      padding: 1.6rem;
+      padding: 1.65rem;
       position: relative;
       overflow: hidden;
-      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+      transition: transform 0.35s var(--ease), border-color 0.35s ease, box-shadow 0.35s ease;
     }
 
+    /* cursor-glow injected by JS */
+    .card-glow {
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(244,239,207,0.09) 0%, transparent 70%);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.3s ease;
+      opacity: 0;
+    }
+    .card:hover .card-glow { opacity: 1; }
+
     .card:hover {
-      transform: translateY(-8px) scale(1.015);
-      border-color: rgba(244, 239, 207, 0.58);
-      box-shadow: 0 22px 48px rgba(0, 0, 0, 0.35);
+      transform: translateY(-7px);
+      border-color: rgba(244, 239, 207, 0.52);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
     }
 
     .tag {
@@ -258,18 +298,24 @@
 
     .button {
       display: inline-flex;
+      align-items: center;
       margin-top: 1rem;
-      padding: 0.85rem 1.25rem;
+      padding: 0.85rem 1.35rem;
       border-radius: 999px;
       border: 1px solid rgba(244, 239, 207, 0.45);
       color: var(--soft-text);
+      font-size: 0.92rem;
+      font-weight: 500;
       text-decoration: none;
-      transition: transform 0.25s ease, background 0.25s ease;
+      transition: transform 0.25s var(--ease), background 0.25s ease,
+                  border-color 0.25s ease, box-shadow 0.25s ease;
     }
 
     .button:hover {
       transform: translateY(-3px);
-      background: rgba(255, 255, 255, 0.045);
+      background: rgba(244, 239, 207, 0.06);
+      border-color: rgba(244, 239, 207, 0.65);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
     }
 
     .divider-statement {
@@ -751,5 +797,29 @@
       <p>This page is intended as a concept space for collaborators and production development.</p>
     </div>
   </footer>
+
+  <script>
+    /* ── Scroll-reveal ── */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    /* ── Card cursor-glow ── */
+    document.querySelectorAll('.card').forEach(card => {
+      const glow = card.querySelector('.card-glow');
+      if (!glow) return;
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        glow.style.left = (e.clientX - r.left)  + 'px';
+        glow.style.top  = (e.clientY - r.top) + 'px';
+      });
+    });
+  </script>
 </body>
 </html>

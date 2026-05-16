@@ -4,32 +4,68 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Apocalypse Theater</title>
+  <meta name="description" content="Apocalypse Theater — cinematic production across sound, story, and visual language. Myth. Memory. Prophecy." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
 
   <style>
-    body {
-      margin: 0;
-      background: #020202;
-      color: #dbe3ff;
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
+    :root {
+      --bg:        #020202;
+      --panel:     #0b0b0b;
+      --text:      #dbe3ff;
+      --muted:     #b7c2e8;
+      --soft:      #f4efcf;
+      --line:      rgba(189, 205, 255, 0.28);
+      --line-warm: rgba(244, 239, 207, 0.28);
+      --accent:    #b9c4f0;
+      --red:       rgba(122, 16, 16, 0.15);
+      --blue:      rgba(31, 47, 140, 0.15);
+      --max:       1100px;
+      --ease:      cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', Arial, sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
     }
+
+    /* ── Grain texture overlay ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.032;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    a { color: inherit; text-decoration: none; }
 
     .container {
-      width: min(1100px, calc(100% - 2rem));
+      width: min(var(--max), calc(100% - 2rem));
       margin: 0 auto;
     }
 
+    /* ── Header ── */
     header {
       position: sticky;
       top: 0;
-      background: #000;
-      border-bottom: 1px solid rgba(189, 205, 255, 0.35);
-      z-index: 10;
+      z-index: 50;
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      background: rgba(2, 2, 2, 0.88);
+      border-bottom: 1px solid var(--line);
+      transition: border-color 0.3s ease;
     }
 
     .nav {
@@ -37,15 +73,18 @@
       justify-content: space-between;
       align-items: center;
       gap: 2rem;
-      padding: 1.2rem 0;
+      padding: 1.15rem 0;
     }
 
     .brand {
-      font-size: 1.7rem;
-      font-weight: 700;
-      color: #dbe3ff;
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: var(--text);
       white-space: nowrap;
+      letter-spacing: -0.04em;
+      transition: opacity 0.2s ease;
     }
+    .brand:hover { opacity: 0.75; }
 
     .nav-right {
       display: flex;
@@ -56,241 +95,314 @@
 
     .nav-links {
       display: flex;
-      gap: 1rem;
-      color: #b7c2e8;
+      gap: 0.25rem;
       flex-wrap: wrap;
     }
 
     .nav-links a {
-      padding: 0.4rem 0.6rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding: 0.4rem 0.75rem;
       border-radius: 6px;
       transition: color 0.2s ease, background 0.2s ease;
     }
-
     .nav-links a:hover {
-      color: #dbe3ff;
-      background: rgba(189, 205, 255, 0.08);
+      color: var(--text);
+      background: rgba(189, 205, 255, 0.09);
     }
 
-    .nav-auth {
-      display: flex;
-      gap: 0.8rem;
-    }
+    .nav-auth { display: flex; gap: 0.7rem; }
 
     .nav-auth a {
-      padding: 0.65rem 1.1rem;
+      padding: 0.6rem 1.1rem;
       border-radius: 999px;
-      border: 1px solid rgba(189, 205, 255, 0.35);
-      font-size: 0.9rem;
-      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      border: 1px solid var(--line);
+      font-size: 0.88rem;
+      color: var(--muted);
+      transition: transform 0.22s var(--ease), background 0.22s ease,
+                  border-color 0.22s ease, color 0.22s ease;
     }
-
     .nav-auth a:hover {
       transform: translateY(-2px);
       background: rgba(189, 205, 255, 0.08);
-      border-color: rgba(189, 205, 255, 0.6);
+      border-color: rgba(189, 205, 255, 0.55);
+      color: var(--text);
     }
-
     .nav-auth .signup {
-      background: #b9c4f0;
+      background: var(--accent);
       color: #050505;
       font-weight: 700;
-      border-color: #b9c4f0;
+      border-color: var(--accent);
     }
-
     .nav-auth .signup:hover {
       background: #ccd4f7;
       border-color: #ccd4f7;
+      color: #020202;
     }
 
+    /* ── Sections ── */
     section {
-      padding: 5rem 0;
-      border-top: 1px solid rgba(189, 205, 255, 0.25);
+      padding: 5.5rem 0;
+      border-top: 1px solid var(--line);
     }
 
+    /* ── Scroll-reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
+    }
+    .reveal.in-view {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── Hero ── */
     .hero {
-      min-height: 85vh;
+      min-height: 88vh;
       display: flex;
       align-items: center;
+      border-top: none;
+      background:
+        radial-gradient(ellipse at top left,  var(--red), transparent 40%),
+        radial-gradient(ellipse at top right, var(--blue), transparent 40%);
     }
 
     .hero-card {
       width: 100%;
-      padding: 4rem;
-      background: #0b0b0b;
-      border: 1px solid rgba(189, 205, 255, 0.45);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      padding: clamp(2.5rem, 6vw, 5rem);
+      background: rgba(11, 11, 11, 0.92);
+      border: 1px solid rgba(189, 205, 255, 0.38);
+      box-shadow: 0 28px 72px rgba(0, 0, 0, 0.6);
+      position: relative;
+      overflow: hidden;
     }
 
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top left,  rgba(244,239,207,0.07), transparent 36%),
+        radial-gradient(circle at bottom right, rgba(185,196,240,0.07), transparent 40%);
+      pointer-events: none;
+    }
+
+    /* ── Eyebrow ── */
     .eyebrow {
-      color: #f4efcf;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
       text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-size: 0.8rem;
-      margin-bottom: 1rem;
-      display: block;
+      letter-spacing: 0.18em;
+      color: var(--soft);
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+    }
+    .eyebrow::before {
+      content: '';
+      width: 2rem;
+      height: 1px;
+      background: var(--soft);
+      opacity: 0.7;
+      flex-shrink: 0;
     }
 
+    /* ── Typography ── */
     h1 {
-      font-size: clamp(3rem, 7vw, 5.5rem);
-      line-height: 1;
-      margin: 0 0 1rem;
-      color: #dbe3ff;
+      font-size: clamp(3rem, 7.5vw, 6rem);
+      line-height: 0.97;
+      letter-spacing: -0.06em;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 1.2rem;
     }
 
     h2 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      margin: 0 0 1rem;
-      color: #dbe3ff;
+      font-size: clamp(1.9rem, 4vw, 3.2rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1rem;
     }
 
     h3 {
-      margin-top: 0;
-      color: #dbe3ff;
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 0.65rem;
     }
 
-    p {
-      color: #b7c2e8;
-    }
+    p { color: var(--muted); margin-top: 0; }
 
     .quote {
-      font-size: clamp(1.7rem, 3vw, 2.5rem);
-      color: #dbe3ff;
+      font-size: clamp(1.55rem, 2.8vw, 2.4rem);
+      line-height: 1.25;
       font-weight: 600;
-      max-width: 700px;
+      color: var(--text);
+      max-width: 680px;
+      letter-spacing: -0.025em;
     }
 
+    /* ── Buttons ── */
     .button {
-      display: inline-block;
-      margin-right: 1rem;
-      margin-top: 1rem;
-      padding: 0.9rem 1.4rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-right: 0.85rem;
+      margin-top: 1.25rem;
+      padding: 0.85rem 1.45rem;
       border-radius: 999px;
-      border: 1px solid rgba(244, 239, 207, 0.45);
-      color: #f4efcf;
-      transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease;
+      border: 1px solid var(--line-warm);
+      color: var(--soft);
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: transform 0.25s var(--ease), background 0.25s ease,
+                  border-color 0.25s ease, box-shadow 0.25s ease;
     }
-
     .button:hover {
       transform: translateY(-3px);
-      background: rgba(244, 239, 207, 0.07);
-      border-color: rgba(244, 239, 207, 0.7);
+      background: rgba(244, 239, 207, 0.06);
+      border-color: rgba(244, 239, 207, 0.6);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
     }
-
     .button-primary {
-      background: #b9c4f0;
+      background: var(--accent);
       color: #050505;
-      border-color: #b9c4f0;
+      border-color: var(--accent);
       font-weight: 700;
     }
-
     .button-primary:hover {
       background: #ccd4f7;
       border-color: #ccd4f7;
-      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(185,196,240,0.25);
     }
 
-    .grid {
-      display: grid;
-      gap: 1.25rem;
-    }
+    /* ── Grid ── */
+    .grid { display: grid; gap: 1.2rem; }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
 
-    .grid-3 {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
+    /* ── Cards ── */
     .card {
-      background: #0b0b0b;
-      border: 1px solid rgba(189, 205, 255, 0.45);
-      padding: 1.6rem;
-      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      padding: 1.65rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.35s var(--ease), border-color 0.35s ease,
+                  box-shadow 0.35s ease;
     }
-
+    /* cursor-glow element injected by JS */
+    .card-glow {
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(244,239,207,0.1) 0%, transparent 70%);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.3s ease;
+      opacity: 0;
+    }
+    .card:hover .card-glow { opacity: 1; }
     .card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(244, 239, 207, 0.6);
-      box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+      transform: translateY(-7px);
+      border-color: rgba(244, 239, 207, 0.52);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.38);
     }
 
-    .open-role {
-      border-style: dashed;
-    }
+    .open-role { border-style: dashed; }
+    .open-role h3 { color: var(--soft); }
 
-    .open-role h3 {
-      color: #f4efcf;
-    }
-
+    /* ── Split section ── */
     .split {
       display: grid;
       grid-template-columns: 1fr 1fr;
       min-height: 520px;
+      border-top: 1px solid var(--line);
     }
-
     .split-text {
-      padding: 4rem;
+      padding: clamp(2rem, 5vw, 4.5rem);
       background: #000;
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
-
     .split-image {
       background: url("https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?q=80&w=1400&auto=format&fit=crop") center/cover;
-      filter: grayscale(100%) contrast(110%);
+      filter: grayscale(100%) contrast(108%);
       min-height: 400px;
+      transition: filter 0.5s ease;
+    }
+    .split-image:hover {
+      filter: grayscale(85%) contrast(112%);
     }
 
+    /* ── Footer ── */
     footer {
-      padding: 2rem 0 3rem;
-      border-top: 1px solid rgba(189, 205, 255, 0.35);
-      color: #b7c2e8;
+      padding: 2.5rem 0 3.5rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
     }
-
     .footer-row {
       display: flex;
       justify-content: space-between;
       gap: 2rem;
       flex-wrap: wrap;
     }
+    footer a {
+      transition: color 0.2s ease;
+    }
+    footer a:hover { color: var(--text); }
 
+    /* ── Feedback button ── */
     .feedback-button {
       position: fixed;
-      right: 1rem;
-      bottom: 1rem;
-      background: #0b0b0b;
-      color: #f4efcf;
-      border: 1px solid rgba(244, 239, 207, 0.45);
-      padding: 0.9rem 1.2rem;
+      right: 1.2rem;
+      bottom: 1.2rem;
+      background: var(--panel);
+      color: var(--soft);
+      border: 1px solid var(--line-warm);
+      padding: 0.85rem 1.25rem;
       border-radius: 999px;
-      transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease;
+      font-size: 0.88rem;
+      font-family: inherit;
+      cursor: pointer;
+      z-index: 100;
+      transition: transform 0.25s var(--ease), background 0.25s ease,
+                  border-color 0.25s ease, box-shadow 0.25s ease;
     }
-
+    .feedback-button::before {
+      content: '';
+      position: absolute;
+      inset: -5px;
+      border-radius: 999px;
+      border: 1px solid rgba(244,239,207,0.22);
+      animation: pulse-ring 3s ease-out infinite;
+      pointer-events: none;
+    }
+    @keyframes pulse-ring {
+      0%   { transform: scale(1);    opacity: 0.6; }
+      70%  { transform: scale(1.15); opacity: 0;   }
+      100% { transform: scale(1.15); opacity: 0;   }
+    }
     .feedback-button:hover {
       transform: translateY(-3px);
       background: #141414;
-      border-color: rgba(244, 239, 207, 0.72);
+      border-color: rgba(244, 239, 207, 0.65);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
     }
 
+    /* ── Responsive ── */
     @media (max-width: 900px) {
-      .grid-3,
-      .split {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-card,
-      .split-text {
-        padding: 2rem;
-      }
-
-      .nav {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .nav-right {
-        align-items: flex-start;
-        flex-direction: column;
-      }
+      .grid-3, .split { grid-template-columns: 1fr; }
+      .hero-card { padding: 2rem; }
+      .split-text { padding: 2rem; }
+      .nav { flex-direction: column; align-items: flex-start; }
+      .nav-right { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
@@ -319,7 +431,7 @@
   <main id="top">
     <section class="hero">
       <div class="container">
-        <div class="hero-card">
+        <div class="hero-card reveal">
           <span class="eyebrow">Cinema · Myth · Memory · Prophecy</span>
           <h1>Apocalypse Theater</h1>
           <p class="quote">Cinema doesn't only reveal. It reconstructs reality.</p>
@@ -330,9 +442,9 @@
     </section>
 
     <section class="split" id="mission">
-      <div class="split-text">
+      <div class="split-text reveal">
         <span class="eyebrow">Our Vision</span>
-        <h2>Founder’s Inspiration</h2>
+        <h2>Founder's Inspiration</h2>
         <p>
           Apocalypse Theater emerges from classical narrative, nonlinear structure, and sound-driven cinema — a cinematic language of tension, intuition, image, music, and silence.
         </p>
@@ -341,7 +453,7 @@
     </section>
 
     <section id="philosophy">
-      <div class="container">
+      <div class="container reveal">
         <span class="eyebrow">Manifesto</span>
         <h2>Meaning is not delivered. It is rediscovered.</h2>
         <p>Myth. Sound. Nonlinear time. Cinema as reconstruction.</p>
@@ -350,21 +462,26 @@
 
     <section id="offerings">
       <div class="container">
-        <span class="eyebrow">Our Offerings</span>
-        <h2>Cinematic production across sound, story, and visual language.</h2>
+        <div class="reveal">
+          <span class="eyebrow">Our Offerings</span>
+          <h2>Cinematic production across sound, story, and visual language.</h2>
+        </div>
 
-        <div class="grid grid-3">
-          <div class="card">
+        <div class="grid grid-3" style="margin-top:2rem;">
+          <div class="card reveal">
+            <div class="card-glow"></div>
             <h3>Movie Soundscapes</h3>
             <p>Immersive, emotionally precise sound design that elevates narrative depth and atmosphere.</p>
           </div>
 
-          <div class="card">
+          <div class="card reveal">
+            <div class="card-glow"></div>
             <h3>Short Films</h3>
             <p>End-to-end cinematic storytelling — from concept and script to production and final edit.</p>
           </div>
 
-          <div class="card">
+          <div class="card reveal">
+            <div class="card-glow"></div>
             <h3>Movie Trailers</h3>
             <p>High-impact visual storytelling for brands and narratives that demand attention and memory.</p>
           </div>
@@ -374,38 +491,46 @@
 
     <section id="contact">
       <div class="container">
-        <span class="eyebrow">Team</span>
-        <h2>Built through collaboration, driven by vision.</h2>
-        <p>A convergence of vision, craft, and cinematic intuition.</p>
+        <div class="reveal">
+          <span class="eyebrow">Team</span>
+          <h2>Built through collaboration, driven by vision.</h2>
+          <p>A convergence of vision, craft, and cinematic intuition.</p>
+        </div>
 
-        <div class="grid grid-3">
-          <div class="card">
+        <div class="grid grid-3" style="margin-top:2rem;">
+          <div class="card reveal">
+            <div class="card-glow"></div>
             <h3>Rodrigo Mendez</h3>
             <p><strong>Founder / Writer</strong><br />Vision-led storytelling shaped by philosophy, cinema, and dreams.</p>
             <p>Contact: <a href="mailto:rodxgomendez@outlook.com">rodxgomendez@outlook.com</a></p>
           </div>
 
-          <div class="card open-role">
+          <div class="card open-role reveal">
+            <div class="card-glow"></div>
             <h3>Open Collaboration</h3>
             <p><strong>Cinematographer</strong><br />Seeking visual collaborators with a cinematic eye for mood, texture, and symbolic framing.</p>
           </div>
 
-          <div class="card open-role">
+          <div class="card open-role reveal">
+            <div class="card-glow"></div>
             <h3>Open Collaboration</h3>
             <p><strong>Scene Editor</strong><br />Seeking editors drawn to rhythm, nonlinear construction, and emotionally precise cuts.</p>
           </div>
 
-          <div class="card open-role">
+          <div class="card open-role reveal">
+            <div class="card-glow"></div>
             <h3>Open Collaboration</h3>
             <p><strong>Sound Architect</strong><br />Seeking musicians to craft original music composition as the narrative drive and scene transitions.</p>
           </div>
 
-          <div class="card open-role">
+          <div class="card open-role reveal">
+            <div class="card-glow"></div>
             <h3>Open Collaboration</h3>
             <p><strong>Actor</strong><br />Seeking actors willing to take on protagonist or antagonist roles, conveying emotion, tension, and depth beyond dialogue.</p>
           </div>
 
-          <div class="card open-role">
+          <div class="card open-role reveal">
+            <div class="card-glow"></div>
             <h3>Open Collaboration</h3>
             <p><strong>Actress</strong><br />Seeking actresses willing to embody protagonist or antagonist roles, conveying strength, contrast, and subtlety through motion.</p>
           </div>
@@ -415,9 +540,10 @@
 
     <section id="statement">
       <div class="container">
-        <div class="card">
-          <p class="quote">“This is not a studio, it's a confrontation with memory, myth, and collapse.”</p>
-          <p>
+        <div class="card reveal">
+          <div class="card-glow"></div>
+          <p class="quote">"This is not a studio, it's a confrontation with memory, myth, and collapse."</p>
+          <p style="margin-top:1rem;">
             Apocalypse Theater exists at the intersection of classical narrative and modern fracture — where time is nonlinear, identity is unstable, and meaning is reconstructed through image, sound, and silence.
           </p>
         </div>
@@ -426,55 +552,22 @@
 
     <section id="latest">
       <div class="container">
-        <span class="eyebrow">Latest Work</span>
-        <h2>In development</h2>
-        <p>A first sequence of cinematic experiments exploring memory, myth, and psychological tension.</p>
+        <div class="reveal">
+          <span class="eyebrow">Latest Work</span>
+          <h2>In development</h2>
+          <p>A first sequence of cinematic experiments exploring memory, myth, and psychological tension.</p>
+        </div>
 
-        <div class="grid grid-3">
-          <div class="card">
-            <h3>Regensburg</h3>
-            <p>A returning student relives intertwined love stories from abroad as memory, premonition, and collective anxiety blur into an impending rupture.</p>
-          </div>
-
-          <div class="card">
-            <h3>New Social Order</h3>
-            <p>Across cities and shifting ideologies, a young man searches for identity and intimacy as political tension and personal disillusionment quietly converge.</p>
-          </div>
-
-          <div class="card">
-            <h3>Rubatosis</h3>
-            <p>After a cosmic encounter alters her mind and body, a physicist begins to perceive time, emotion, and reality as unstable frequencies.</p>
-          </div>
-
-          <div class="card">
-            <h3>Downstream &amp; West</h3>
-            <p>An amnesiac outlaw wanders a fractured West, chasing vengeance and identity as memory, masculinity, and loyalty collapse into myth.</p>
-          </div>
-
-          <div class="card">
-            <h3>Ocean Castle</h3>
-            <p>A dying informant ascends a criminal empire while love, betrayal, and exile entangle in a final attempt at escape.</p>
-          </div>
-
-          <div class="card">
-            <h3>La Rosa Blanca</h3>
-            <p>A politician’s search for truth unravels into a reverse-told tragedy of love, violence, and the quiet tyranny of memory.</p>
-          </div>
-
-          <div class="card">
-            <h3>Eye of an Eclipse</h3>
-            <p>After betrayal fractures a covert mission, a fugitive agent follows a cryptic trail across Europe as unseen forces close in.</p>
-          </div>
-
-          <div class="card">
-            <h3>Ozymandias’ Mirror</h3>
-            <p>A deep-space mission to recover a lost signal reveals a reality where time bends inward and existence begins to question itself.</p>
-          </div>
-
-          <div class="card">
-            <h3>Unknown Archetype</h3>
-            <p>After a neural simulation fractures his memory and sense of self, an AI ethicist drifts through collapsing timelines, where protection turns into annihilation.</p>
-          </div>
+        <div class="grid grid-3" style="margin-top:2rem;">
+          <div class="card reveal"><div class="card-glow"></div><h3>Regensburg</h3><p>A returning student relives intertwined love stories from abroad as memory, premonition, and collective anxiety blur into an impending rupture.</p></div>
+          <div class="card reveal"><div class="card-glow"></div><h3>New Social Order</h3><p>Across cities and shifting ideologies, a young man searches for identity and intimacy as political tension and personal disillusionment quietly converge.</p></div>
+          <div class="card reveal"><div class="card-glow"></div><h3>Rubatosis</h3><p>After a cosmic encounter alters her mind and body, a physicist begins to perceive time, emotion, and reality as unstable frequencies.</p></div>
+          <div class="card reveal"><div class="card-glow"></div><h3>Downstream &amp; West</h3><p>An amnesiac outlaw wanders a fractured West, chasing vengeance and identity as memory, masculinity, and loyalty collapse into myth.</p></div>
+          <div class="card reveal"><div class="card-glow"></div><h3>Ocean Castle</h3><p>A dying informant ascends a criminal empire while love, betrayal, and exile entangle in a final attempt at escape.</p></div>
+          <div class="card reveal"><div class="card-glow"></div><h3>La Rosa Blanca</h3><p>A politician's search for truth unravels into a reverse-told tragedy of love, violence, and the quiet tyranny of memory.</p></div>
+          <div class="card reveal"><div class="card-glow"></div><h3>Eye of an Eclipse</h3><p>After betrayal fractures a covert mission, a fugitive agent follows a cryptic trail across Europe as unseen forces close in.</p></div>
+          <div class="card reveal"><div class="card-glow"></div><h3>Ozymandias' Mirror</h3><p>A deep-space mission to recover a lost signal reveals a reality where time bends inward and existence begins to question itself.</p></div>
+          <div class="card reveal"><div class="card-glow"></div><h3>Unknown Archetype</h3><p>After a neural simulation fractures his memory and sense of self, an AI ethicist drifts through collapsing timelines, where protection turns into annihilation.</p></div>
         </div>
       </div>
     </section>
@@ -499,27 +592,44 @@
   <a class="feedback-button" href="mailto:rodxgomendez@outlook.com?subject=Apocalypse%20Theater%20Feedback">Request / Feedback</a>
 
   <script>
-    // Unique visitor counter — only increments once per browser session
-    const VISITED_KEY = "apocalypse_visited";
-    const COUNT_KEY   = "apocalypse_unique_visits";
-
-    let visits = parseInt(localStorage.getItem(COUNT_KEY) || "0", 10);
-
-    // Only count this person once (sessionStorage clears when browser tab is closed)
+    /* ── Unique visitor counter ── */
+    const VISITED_KEY = 'apocalypse_visited';
+    const COUNT_KEY   = 'apocalypse_unique_visits';
+    let visits = parseInt(localStorage.getItem(COUNT_KEY) || '0', 10);
     if (!sessionStorage.getItem(VISITED_KEY)) {
-      sessionStorage.setItem(VISITED_KEY, "1");
+      sessionStorage.setItem(VISITED_KEY, '1');
       visits += 1;
       localStorage.setItem(COUNT_KEY, visits);
     }
-
-    const counter = document.getElementById("visit-counter");
+    const counter = document.getElementById('visit-counter');
     let current = 0;
-
-    const interval = setInterval(() => {
+    const tick = setInterval(() => {
       current++;
-      counter.innerText = current;
-      if (current >= visits) clearInterval(interval);
+      counter.textContent = current;
+      if (current >= visits) clearInterval(tick);
     }, 35);
+
+    /* ── Scroll-reveal ── */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    /* ── Card cursor-glow ── */
+    document.querySelectorAll('.card').forEach(card => {
+      const glow = card.querySelector('.card-glow');
+      if (!glow) return;
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        glow.style.left = (e.clientX - rect.left) + 'px';
+        glow.style.top  = (e.clientY - rect.top)  + 'px';
+      });
+    });
   </script>
 </body>
 </html>
