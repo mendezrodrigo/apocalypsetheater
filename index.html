@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles/main.css" />
 
   <style>
     :root {
@@ -410,19 +411,19 @@
 <body>
   <header>
     <div class="container nav">
-      <a href="#top" class="brand">Apocalypse Theater</a>
+      <a href="index.html" class="brand">Apocalypse Theater</a>
 
       <div class="nav-right">
         <nav class="nav-links">
           <a href="#mission">Mission</a>
           <a href="#philosophy">Philosophy</a>
           <a href="#contact">Contact</a>
-          <a href="production-hub.html">Production Hub</a>
+          <a href="production.html">Production Cinema</a>
         </nav>
 
         <div class="nav-auth">
-          <a href="#">Login</a>
-          <a href="#" class="signup">Sign Up</a>
+          <a href="auth.html">Login</a>
+          <a href="auth.html" class="signup">Sign Up</a>
         </div>
       </div>
     </div>
@@ -430,16 +431,19 @@
 
   <main id="top">
     <section class="hero">
-      <div class="container">
-        <div class="hero-card reveal">
-          <span class="eyebrow">Cinema · Myth · Memory · Prophecy</span>
-          <h1>Apocalypse Theater</h1>
-          <p class="quote">Cinema doesn't only reveal. It reconstructs reality.</p>
-          <a class="button button-primary" href="#mission">Enter the vision</a>
-          <a class="button" href="#contact">Get in touch</a>
-        </div>
-      </div>
-    </section>
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">Cinema · Myth · Memory · Prophecy</span>
+      <h1>Apocalypse Theater</h1>
+      <p class="quote">Cinema doesn't only reveal. It reconstructs reality.</p>
+      <a class="button button-primary" href="#mission">Enter the vision</a>
+      <a class="button" href="#contact">Get in touch</a>
+    </div>
+    <div class="hero-visual">
+      <img src="assets/theater.jpg" alt="Founder's Inspiration" class="hero-image" />
+    </div>
+  </div>
+</section>
 
     <section class="split" id="mission">
       <div class="split-text reveal">
@@ -591,45 +595,6 @@
 
   <a class="feedback-button" href="mailto:rodxgomendez@outlook.com?subject=Apocalypse%20Theater%20Feedback">Request / Feedback</a>
 
-  <script>
-    /* ── Unique visitor counter ── */
-    const VISITED_KEY = 'apocalypse_visited';
-    const COUNT_KEY   = 'apocalypse_unique_visits';
-    let visits = parseInt(localStorage.getItem(COUNT_KEY) || '0', 10);
-    if (!sessionStorage.getItem(VISITED_KEY)) {
-      sessionStorage.setItem(VISITED_KEY, '1');
-      visits += 1;
-      localStorage.setItem(COUNT_KEY, visits);
-    }
-    const counter = document.getElementById('visit-counter');
-    let current = 0;
-    const tick = setInterval(() => {
-      current++;
-      counter.textContent = current;
-      if (current >= visits) clearInterval(tick);
-    }, 35);
-
-    /* ── Scroll-reveal ── */
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('in-view');
-          observer.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    /* ── Card cursor-glow ── */
-    document.querySelectorAll('.card').forEach(card => {
-      const glow = card.querySelector('.card-glow');
-      if (!glow) return;
-      card.addEventListener('mousemove', e => {
-        const rect = card.getBoundingClientRect();
-        glow.style.left = (e.clientX - rect.left) + 'px';
-        glow.style.top  = (e.clientY - rect.top)  + 'px';
-      });
-    });
-  </script>
+  <script src="/scripts/main.js"></script>
 </body>
 </html>
