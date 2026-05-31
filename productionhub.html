@@ -5,52 +5,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Production Cinema | Apocalypse Theater</title>
-  <meta name="description" content="Production Cinema is the collaboration space for Apocalypse Theater projects, roles, scheduling, sound, and short-film production." />
+  <meta
+    name="description"
+    content="Apocalypse Theater Production Cinema is a development space for cinematic collaboration, projects, roles, cities, sound, story, and short-film production."
+  />
 
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" href="favicon.png" />
   <meta name="theme-color" content="#050505" />
 
   <meta property="og:title" content="Production Cinema | Apocalypse Theater" />
-  <meta property="og:description" content="Projects, roles, scheduling, sound, and short-film production." />
+  <meta property="og:description" content="Projects, roles, scheduling, sound, story, and short-film production." />
   <meta property="og:image" content="https://apocalypsetheater.org/preview.jpg" />
   <meta property="og:url" content="https://apocalypsetheater.org/productionhub.html" />
   <meta property="og:type" content="website" />
 
   <style>
     :root {
-      --bg: #050505;
-      --panel: rgba(14, 14, 14, 0.92);
-      --panel-soft: rgba(255, 255, 255, 0.055);
+      --bg: #020202;
+      --panel: rgba(11, 11, 11, 0.88);
+      --panel-strong: rgba(14, 14, 14, 0.96);
       --text: #dbe3ff;
-      --muted: #aeb8dc;
+      --muted: #b7c2e8;
       --soft: #f4efcf;
-      --line: rgba(189, 205, 255, 0.24);
+      --line: rgba(189, 205, 255, 0.28);
       --line-warm: rgba(244, 239, 207, 0.28);
+      --accent: #b9c4f0;
       --red: #7a1010;
       --blue: #1f2f8c;
       --max: 1160px;
-      --shadow: 0 25px 70px rgba(0, 0, 0, 0.55);
+      --shadow: 0 28px 72px rgba(0, 0, 0, 0.58);
       --ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    * {
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
       margin: 0;
     }
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 96px;
     }
 
     body {
-      margin: 0;
-      font-family: Inter, Arial, sans-serif;
+      min-height: 100vh;
       background:
         radial-gradient(ellipse at top left, rgba(122, 16, 16, 0.16), transparent 36%),
         radial-gradient(ellipse at top right, rgba(31, 47, 140, 0.16), transparent 38%),
-        linear-gradient(180deg, #000 0%, #050505 55%, #020202 100%);
+        linear-gradient(180deg, #000 0%, #050505 52%, #020202 100%);
       color: var(--text);
+      font-family: Inter, Arial, sans-serif;
       line-height: 1.65;
       overflow-x: hidden;
     }
@@ -71,11 +78,6 @@
       text-decoration: none;
     }
 
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
     .container {
       width: min(calc(100% - 2rem), var(--max));
       margin: 0 auto;
@@ -85,8 +87,9 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      backdrop-filter: blur(14px);
-      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      background: rgba(0, 0, 0, 0.86);
       border-bottom: 1px solid var(--line);
     }
 
@@ -94,14 +97,15 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.15rem 0;
-      gap: 1rem;
+      gap: 1.4rem;
+      padding: 1.05rem 0;
     }
 
     .brand-wrap {
       display: flex;
       align-items: center;
       gap: 0.8rem;
+      min-width: max-content;
     }
 
     .brand-mark {
@@ -110,58 +114,66 @@
       border-radius: 50%;
       background: conic-gradient(from 180deg, var(--red), var(--blue), var(--red));
       box-shadow: 0 0 28px rgba(185, 196, 240, 0.18);
-      flex: 0 0 auto;
     }
 
     .brand {
-      font-size: clamp(1.3rem, 2vw, 2rem);
+      font-size: clamp(1.35rem, 2vw, 1.9rem);
       font-weight: 800;
-      letter-spacing: -0.04em;
+      letter-spacing: -0.045em;
       white-space: nowrap;
+      transition: opacity 0.2s ease;
+    }
+
+    .brand:hover {
+      opacity: 0.75;
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 0.7rem;
+      gap: 0.45rem;
       flex-wrap: wrap;
-      color: var(--muted);
+      justify-content: flex-end;
     }
 
     .nav-links a,
-    .current-page {
-      border: 1px solid rgba(244, 239, 207, 0.28);
+    .member-badge {
+      border: 1px solid rgba(244, 239, 207, 0.36);
       color: var(--soft);
-      padding: 0.52rem 0.86rem;
+      padding: 0.55rem 0.85rem;
       border-radius: 999px;
-      font-size: 0.84rem;
-      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      font-size: 0.86rem;
+      transition:
+        transform 0.22s var(--ease),
+        background 0.22s ease,
+        border-color 0.22s ease,
+        color 0.22s ease;
     }
 
     .nav-links a:hover {
       transform: translateY(-2px);
-      background: rgba(244, 239, 207, 0.07);
-      border-color: rgba(244, 239, 207, 0.55);
+      background: rgba(244, 239, 207, 0.06);
+      border-color: rgba(244, 239, 207, 0.68);
     }
 
-    .current-page {
+    .member-badge {
+      background: rgba(244, 239, 207, 0.055);
       cursor: default;
+      white-space: nowrap;
       pointer-events: none;
-      background: rgba(244, 239, 207, 0.06);
-      color: rgba(244, 239, 207, 0.78);
-      border-color: rgba(244, 239, 207, 0.18);
     }
 
     section {
-      padding: 5rem 0;
+      padding: 5.25rem 0;
       border-top: 1px solid var(--line);
     }
 
     .hero {
       min-height: 86vh;
       display: grid;
-      align-items: center;
+      place-items: center;
       border-top: none;
+      padding-top: 4rem;
       position: relative;
       overflow: hidden;
     }
@@ -171,9 +183,9 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(90deg, rgba(0, 0, 0, 0.94) 0%, rgba(0, 0, 0, 0.74) 46%, rgba(0, 0, 0, 0.38) 100%),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.94) 0%, rgba(0, 0, 0, 0.76) 45%, rgba(0, 0, 0, 0.42) 100%),
         url("assets/theater.jpg") center right / cover no-repeat;
-      opacity: 0.88;
+      opacity: 0.9;
       z-index: 0;
     }
 
@@ -183,20 +195,27 @@
       inset: 0;
       background:
         radial-gradient(circle at top left, rgba(244, 239, 207, 0.08), transparent 34%),
-        radial-gradient(circle at bottom right, rgba(31, 47, 140, 0.22), transparent 38%);
-      z-index: 1;
+        radial-gradient(circle at bottom right, rgba(185, 196, 240, 0.12), transparent 38%);
       pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero-card {
+      padding: clamp(2.2rem, 5vw, 4.8rem);
+      background: linear-gradient(180deg, rgba(12, 12, 12, 0.78), rgba(5, 5, 5, 0.86));
+      border: 1px solid rgba(189, 205, 255, 0.36);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: visible;
+      z-index: 2;
+      backdrop-filter: blur(8px);
+      max-width: 860px;
     }
 
     .hero-content {
       position: relative;
       z-index: 2;
-      max-width: 760px;
-      padding: clamp(2rem, 5vw, 4rem);
-      background: linear-gradient(180deg, rgba(12, 12, 12, 0.78), rgba(5, 5, 5, 0.84));
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(8px);
+      max-width: 860px;
     }
 
     .eyebrow {
@@ -206,7 +225,8 @@
       text-transform: uppercase;
       letter-spacing: 0.16em;
       color: var(--soft);
-      font-size: 0.78rem;
+      font-size: 0.76rem;
+      font-weight: 600;
       margin-bottom: 1.2rem;
     }
 
@@ -215,34 +235,38 @@
       width: 2rem;
       height: 1px;
       background: var(--soft);
+      opacity: 0.72;
     }
 
     h1,
     h2,
     h3 {
       line-height: 1.05;
+      color: var(--text);
     }
 
     h1 {
-      font-size: clamp(3rem, 7vw, 5.8rem);
-      max-width: 11ch;
+      max-width: 14ch;
       margin: 0 0 1.2rem;
-      letter-spacing: -0.06em;
+      font-size: clamp(2.8rem, 6.25vw, 5.6rem);
+      letter-spacing: -0.045em;
+      line-height: 1;
       font-weight: 800;
+      overflow: visible;
     }
 
     h2 {
-      font-size: clamp(1.9rem, 4vw, 3.2rem);
       margin: 0 0 1rem;
-      letter-spacing: -0.04em;
-      font-weight: 700;
+      font-size: clamp(1.9rem, 4vw, 3.25rem);
+      letter-spacing: -0.045em;
+      font-weight: 750;
     }
 
     h3 {
-      font-size: 1.12rem;
-      font-weight: 650;
-      letter-spacing: -0.02em;
       margin: 0 0 0.65rem;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+      font-weight: 650;
     }
 
     p {
@@ -250,22 +274,77 @@
       margin-top: 0;
     }
 
-    .quote {
-      font-size: clamp(1.55rem, 3vw, 2.35rem);
-      line-height: 1.25;
-      font-weight: 700;
+    strong {
       color: var(--text);
-      max-width: 46rem;
     }
 
     .lead {
-      max-width: 44rem;
-      font-size: 1.08rem;
+      max-width: 48rem;
+      font-size: 1.12rem;
+    }
+
+    .quote {
+      max-width: 48rem;
+      color: var(--text);
+      font-size: clamp(1.55rem, 3vw, 2.42rem);
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.03em;
     }
 
     .section-head {
+      max-width: 790px;
       margin-bottom: 2rem;
-      max-width: 760px;
+    }
+
+    .button-row {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+      margin-top: 1.35rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-height: 46px;
+      padding: 0.85rem 1.35rem;
+      border-radius: 999px;
+      border: 1px solid rgba(244, 239, 207, 0.45);
+      color: var(--soft);
+      font-size: 0.92rem;
+      font-weight: 550;
+      transition:
+        transform 0.25s var(--ease),
+        background 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        color 0.25s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+      background: rgba(244, 239, 207, 0.06);
+      border-color: rgba(244, 239, 207, 0.68);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      color: var(--soft);
+    }
+
+    .button-primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #050505;
+      font-weight: 800;
+    }
+
+    .button-primary:hover {
+      background: #ccd4f7;
+      border-color: #ccd4f7;
+      color: #020202;
+      box-shadow: 0 10px 28px rgba(185, 196, 240, 0.25);
     }
 
     .grid {
@@ -282,12 +361,32 @@
     }
 
     .card {
-      background: linear-gradient(180deg, rgba(14, 14, 14, 0.96), rgba(8, 8, 8, 0.98));
+      min-height: 100%;
+      background: linear-gradient(180deg, rgba(14, 14, 14, 0.94), rgba(8, 8, 8, 0.98));
       border: 1px solid var(--line);
       padding: 1.65rem;
       position: relative;
       overflow: hidden;
-      transition: transform 0.35s var(--ease), border-color 0.35s ease, box-shadow 0.35s ease;
+      transition:
+        transform 0.35s var(--ease),
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+    }
+
+    .card-glow {
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(244, 239, 207, 0.09) 0%, transparent 70%);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    .card:hover .card-glow {
+      opacity: 1;
     }
 
     .card:hover {
@@ -306,54 +405,23 @@
       margin-bottom: 0.9rem;
     }
 
-    .button {
-      display: inline-flex;
-      align-items: center;
-      margin-top: 1rem;
-      margin-right: 0.7rem;
-      padding: 0.85rem 1.35rem;
-      border-radius: 999px;
-      border: 1px solid rgba(244, 239, 207, 0.45);
+    .role-card {
+      border-style: dashed;
+    }
+
+    .status {
       color: var(--soft);
-      font-size: 0.92rem;
-      font-weight: 600;
-      transition: transform 0.25s var(--ease), background 0.25s ease, border-color 0.25s ease;
+      font-weight: 800;
     }
 
-    .button:hover {
-      transform: translateY(-3px);
-      background: rgba(244, 239, 207, 0.06);
-      border-color: rgba(244, 239, 207, 0.65);
-    }
-
-    .button-primary {
-      background: var(--soft);
-      color: #050505;
-      border-color: var(--soft);
-    }
-
-    .index-list {
-      display: grid;
-      border-top: 1px solid var(--line);
-    }
-
-    .index-row {
-      display: grid;
-      grid-template-columns: 4rem 1fr auto;
-      gap: 1rem;
-      align-items: center;
-      padding: 1.05rem 0;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .index-row span {
-      color: var(--soft);
-      font-size: 0.82rem;
-    }
-
-    .index-row p {
-      max-width: 32rem;
-      font-size: 0.92rem;
+    .divider-statement {
+      padding: clamp(2rem, 4vw, 3rem);
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(120deg, rgba(122, 16, 16, 0.13), transparent 38%),
+        linear-gradient(300deg, rgba(31, 47, 140, 0.14), transparent 38%),
+        var(--panel);
+      box-shadow: var(--shadow);
     }
 
     .social-icons {
@@ -364,59 +432,156 @@
     }
 
     .social-icon {
-      width: 44px;
-      height: 44px;
+      width: 54px;
+      height: 54px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       border-radius: 999px;
       border: 1px solid rgba(244, 239, 207, 0.28);
-      background: rgba(244, 239, 207, 0.06);
+      background: rgba(244, 239, 207, 0.055);
       color: var(--soft);
-      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      transition:
+        transform 0.22s var(--ease),
+        background 0.22s ease,
+        border-color 0.22s ease,
+        box-shadow 0.22s ease;
     }
 
     .social-icon:hover {
-      transform: translateY(-2px);
-      background: rgba(244, 239, 207, 0.11);
+      transform: translateY(-3px);
+      background: rgba(244, 239, 207, 0.1);
       border-color: rgba(244, 239, 207, 0.58);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.34);
     }
 
     .social-icon svg {
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
       fill: currentColor;
     }
 
     footer {
-      padding: 2.5rem 0;
+      padding: 2.5rem 0 3.5rem;
       border-top: 1px solid var(--line);
       color: var(--muted);
     }
 
-    @media (max-width: 900px) {
-      .grid-2,
-      .grid-3 {
-        grid-template-columns: 1fr;
+    footer a {
+      transition: color 0.2s ease;
+    }
+
+    footer a:hover {
+      color: var(--soft);
+    }
+
+    .feedback-button {
+      position: fixed;
+      right: 1.2rem;
+      bottom: 1.2rem;
+      z-index: 1000;
+      background: rgba(11, 11, 11, 0.92);
+      color: var(--soft);
+      border: 1px solid var(--line-warm);
+      padding: 0.85rem 1.25rem;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-family: inherit;
+      cursor: pointer;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.34);
+      transition:
+        transform 0.25s var(--ease),
+        background 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .feedback-button::before {
+      content: "";
+      position: absolute;
+      inset: -5px;
+      border-radius: 999px;
+      border: 1px solid rgba(244, 239, 207, 0.22);
+      animation: pulse-ring 3s ease-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes pulse-ring {
+      0% {
+        transform: scale(1);
+        opacity: 0.6;
       }
 
-      .hero::before {
-        background:
-          linear-gradient(180deg, rgba(0, 0, 0, 0.94), rgba(0, 0, 0, 0.72)),
-          url("assets/theater.jpg") center / cover no-repeat;
+      70%,
+      100% {
+        transform: scale(1.15);
+        opacity: 0;
       }
+    }
 
+    .feedback-button:hover {
+      transform: translateY(-3px);
+      background: #141414;
+      border-color: rgba(244, 239, 207, 0.65);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition:
+        opacity 0.75s var(--ease),
+        transform 0.75s var(--ease);
+    }
+
+    .reveal.in-view {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (max-width: 980px) {
       .nav {
         align-items: flex-start;
         flex-direction: column;
       }
 
       .nav-links {
-        align-items: flex-start;
+        justify-content: flex-start;
       }
 
-      .index-row {
+      .grid-2,
+      .grid-3 {
         grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 4.5rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      section {
+        padding: 4rem 0;
+      }
+
+      .hero-card,
+      .card,
+      .divider-statement {
+        border-radius: 0;
+      }
+
+      .button-row {
+        width: 100%;
+      }
+
+      .button {
+        flex: 1 1 auto;
+      }
+
+      .feedback-button {
+        right: 0.75rem;
+        bottom: 0.75rem;
       }
     }
   </style>
@@ -425,18 +590,20 @@
 <body>
   <header>
     <div class="container nav">
-      <div class="brand-wrap">
-        <div class="brand-mark"></div>
-        <a href="index.html" class="brand">Apocalypse Theater</a>
-      </div>
+      <a href="index.html" class="brand-wrap" aria-label="Apocalypse Theater main site">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand">Apocalypse Theater</span>
+      </a>
 
-      <nav class="nav-links">
+      <nav class="nav-links" aria-label="Production navigation">
         <a href="index.html">Main Site</a>
-        <a href="#projects">Projects</a>
+        <a href="#mission">Mission</a>
+        <a href="#physical">Physical</a>
+        <a href="#remote">Remote</a>
         <a href="#roles">Roles</a>
-        <a href="#schedule">Schedule</a>
-        <a href="#contact">Contact</a>
-        <span class="current-page">Production Cinema</span>
+        <a href="#projects">Projects</a>
+        <a href="#request">Request</a>
+        <span class="member-badge">Production</span>
       </nav>
     </div>
   </header>
@@ -444,148 +611,371 @@
   <main>
     <section class="hero">
       <div class="container">
-        <div class="hero-content">
-          <span class="eyebrow">Private Production Space</span>
-          <h1>Production Cinema</h1>
-          <p class="quote">
-            A hidden architecture for building cinema through cities, sound, memory, and collaboration.
-          </p>
-          <p class="lead">
-            Join by role, project, city, or production window.
-          </p>
-          <a class="button button-primary" href="#roles">View Roles</a>
-          <a class="button" href="#projects">View Projects</a>
+        <div class="hero-card reveal">
+          <div class="hero-content">
+            <span class="eyebrow">Private Development Space</span>
+            <h1>Production Cinema</h1>
+            <p class="quote">
+              A hidden architecture for building cinema through cities, sound, memory, and collaboration.
+            </p>
+            <p class="lead">
+              This production space is designed for collaborators who want to help develop, shoot, perform,
+              compose, edit, and build the emerging cinematic universe of Apocalypse Theater.
+            </p>
+            <div class="button-row">
+              <a class="button button-primary" href="#request">Request to help</a>
+              <a class="button" href="#projects">View projects</a>
+              <a class="button" href="index.html">Return to main site</a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <section id="mission">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head reveal">
           <span class="eyebrow">Mission</span>
-          <h2>Europe’s flexible short-film collaboration network.</h2>
+          <h2>Europe&rsquo;s flexible short-film collaboration network.</h2>
           <p>
-            Creators can contribute by role, city, scene, project, or production window — without needing to commit full-time.
+            Apocalypse Theater is being developed as a cinematic community where creators can contribute by role,
+            city, scene, project, or production window &mdash; without needing to commit full-time.
           </p>
         </div>
 
         <div class="grid grid-3">
-          <div class="card">
+          <article class="card reveal">
+            <div class="card-glow"></div>
             <span class="tag">Cinema</span>
             <h3>Short Films</h3>
-            <p>Experimental stories shaped by music, memory, nonlinear time, and symbolic imagery.</p>
-          </div>
+            <p>Developing experimental short films shaped by music, memory, nonlinear time, symbolic imagery, and emotional tension.</p>
+          </article>
 
-          <div class="card">
+          <article class="card reveal">
+            <div class="card-glow"></div>
             <span class="tag">Cities</span>
-            <h3>Germany & Italy</h3>
-            <p>Nuremberg, Munich, Berlin, Regensburg, Milan, Rome, Florence, and beyond.</p>
-          </div>
+            <h3>Germany &amp; Italy</h3>
+            <p>Beginning across Nuremberg, Munich, Berlin, Regensburg, Milan, Rome, Florence, and other cities where collaborators can join specific shoots.</p>
+          </article>
 
-          <div class="card">
+          <article class="card reveal">
+            <div class="card-glow"></div>
             <span class="tag">Access</span>
             <h3>Flexible Participation</h3>
-            <p>Join for a shoot, a scene, a weekend, or a remote creative sprint.</p>
-          </div>
+            <p>Members may contribute for a weekend shoot, a single scene, a month of music composition, or a remote development sprint.</p>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="projects">
+    <section id="physical">
       <div class="container">
-        <div class="section-head">
-          <span class="eyebrow">Projects</span>
-          <h2>Current cinematic worlds.</h2>
-          <p>Each project can be supported by role, location, or production stage.</p>
-        </div>
-
-        <div class="index-list">
-          <div class="index-row"><span>01</span><h3>Movies of Regensburg</h3><p>Memory, love, return, and rupture.</p></div>
-          <div class="index-row"><span>02</span><h3>New Social Order</h3><p>Identity, politics, intimacy, and disillusionment.</p></div>
-          <div class="index-row"><span>03</span><h3>Rubatosis</h3><p>Time, physics, body, and unstable perception.</p></div>
-          <div class="index-row"><span>04</span><h3>Downstream and West</h3><p>A mythic western of memory and violence.</p></div>
-          <div class="index-row"><span>05</span><h3>Ocean Castle</h3><p>Crime, exile, betrayal, and escape.</p></div>
-          <div class="index-row"><span>06</span><h3>La Rosa Blanca</h3><p>A reverse tragedy of truth and memory.</p></div>
-          <div class="index-row"><span>07</span><h3>Iceland Eclipse</h3><p>A cold thriller of betrayal and pursuit.</p></div>
-          <div class="index-row"><span>08</span><h3>House of Madness’s Mirror</h3><p>Space, time, reflection, and collapse.</p></div>
-          <div class="index-row"><span>09</span><h3>Unknown Archetype</h3><p>AI, memory fracture, protection, and annihilation.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="roles">
-      <div class="container">
-        <div class="section-head">
-          <span class="eyebrow">Roles</span>
-          <h2>Open collaboration roles.</h2>
-          <p>Physical and remote roles for short-film production.</p>
+        <div class="section-head reveal">
+          <span class="eyebrow">Physical Production</span>
+          <h2>In-person cinematic production.</h2>
+          <p>
+            These roles are focused on shooting days, location-based scenes, acting, camera work,
+            set design, movement, blocking, light, and real-world production.
+          </p>
         </div>
 
         <div class="grid grid-3">
-          <div class="card"><h3>Acting</h3><p>Dialogue, silence, movement, restraint, and emotional force.</p></div>
-          <div class="card"><h3>Cinematography</h3><p>Framing, shadow, city movement, texture, and visual contrast.</p></div>
-          <div class="card"><h3>Set Design</h3><p>Rooms, props, color, clothing, atmosphere, and environmental detail.</p></div>
-          <div class="card"><h3>Screenwriting</h3><p>Nonlinear structure, dialogue, symbols, and emotional story logic.</p></div>
-          <div class="card"><h3>Music Composition</h3><p>Soundscapes inspired by Hans Zimmer, Ludwig Göransson, Ennio Morricone, and cinematic western textures.</p></div>
-          <div class="card"><h3>Editing & Storyboarding</h3><p>Visual sequencing, emotional cuts, transitions, and pacing.</p></div>
+          <article class="card reveal">
+            <div class="card-glow"></div>
+            <h3>Acting</h3>
+            <p>Dialogue, movement, emotional tension, protagonist and antagonist performances during shooting days or production weekends.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-glow"></div>
+            <h3>Cinematography</h3>
+            <p>Scene framing, movement, symbolic imagery, transitions, visual contrast, and location-based shooting.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-glow"></div>
+            <h3>Set Design</h3>
+            <p>Lighting, props, rooms, environments, city textures, and atmosphere shaping the visual language.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="remote">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Remote Collaboration</span>
+          <h2>Creative work developed remotely.</h2>
+          <p>
+            These roles can be developed from anywhere over days, weeks, or a full month depending on the project&rsquo;s scope.
+          </p>
+        </div>
+
+        <div class="grid grid-3">
+          <article class="card reveal">
+            <div class="card-glow"></div>
+            <h3>Screenwriting</h3>
+            <p>Nonlinear storytelling, emotional structure, dialogue writing, symbolism, and mythic narrative development.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-glow"></div>
+            <h3>Music Composition</h3>
+            <p>Experimental sound design inspired by Hans Zimmer, Ludwig G&ouml;ransson, Ennio Morricone, Carlos Santana, and cinematic western soundscapes.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-glow"></div>
+            <h3>Editing &amp; Storyboarding</h3>
+            <p>Visual sequencing, emotional cuts, transitions, mood boarding, and cinematic pacing.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="capabilities">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Current Capabilities</span>
+          <h2>What already exists.</h2>
+          <p>
+            Apocalypse Theater already includes story concepts, project synopses, mood boards,
+            early storyboards, cinematography experiments, transitions, and a growing visual language.
+          </p>
+        </div>
+
+        <div class="grid grid-3">
+          <article class="card reveal"><div class="card-glow"></div><h3>Synopsis Development</h3><p>Core story worlds, premises, emotional conflicts, nonlinear structures, and symbolic themes are already being developed.</p></article>
+          <article class="card reveal"><div class="card-glow"></div><h3>Mood Boarding</h3><p>Each project is shaped through color, contrast, texture, atmosphere, references, locations, and emotional palettes.</p></article>
+          <article class="card reveal"><div class="card-glow"></div><h3>Storyboarding</h3><p>Scenes are translated into visual sequences, symbolic frames, transitions, and cinematic movement.</p></article>
+          <article class="card reveal"><div class="card-glow"></div><h3>Cinematography Tests</h3><p>Early visual experiments explore framing, shadow, distance, memory, city movement, and natural landscapes.</p></article>
+          <article class="card reveal"><div class="card-glow"></div><h3>Transitions</h3><p>Nonlinear transitions are explored as emotional cuts between memory, dream, premonition, and reality.</p></article>
+          <article class="card reveal"><div class="card-glow"></div><h3>Sound Direction</h3><p>Music and sound are treated as narrative engines, not background decoration.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="sound">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Sound Philosophy</span>
+          <h2>Music must drive the narrative forward.</h2>
+          <p>
+            Apocalypse Theater is seeking musicians and sound artists who can create experimental soundscapes
+            across several weeks, especially for short films between 5 and 20 minutes depending on the project.
+          </p>
+        </div>
+
+        <div class="grid grid-2">
+          <article class="card reveal">
+            <div class="card-glow"></div>
+            <h3>Remote Music Composition</h3>
+            <p>
+              Musicians can work remotely from their own studios to create original compositions,
+              motifs, textures, rhythms, and transitions over several weeks or one month.
+            </p>
+            <p>The goal is not generic scoring. The goal is emotional architecture.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-glow"></div>
+            <h3>Experimental Instruments</h3>
+            <p>
+              Especially welcome: woodwinds, drums, guitar, synthesizer, piano, percussion,
+              ambient textures, field recordings, distorted rhythm, silence, and hybrid acoustic-electronic sound.
+            </p>
+            <p>The sound should feel cinematic, mythic, unstable, and alive.</p>
+          </article>
+        </div>
+
+        <div class="divider-statement reveal" style="margin-top: 1.5rem;">
+          <p class="quote">
+            Inspired by the emotional force of Hans Zimmer, Ludwig G&ouml;ransson, Ennio Morricone,
+            Carlos Santana, Sergio Leone, Christopher Nolan, David Lynch, and Denis Villeneuve.
+          </p>
         </div>
       </div>
     </section>
 
     <section id="lineage">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head reveal">
           <span class="eyebrow">Creative Lineage</span>
           <h2>Past, present, and future cinema.</h2>
-          <p>Apocalypse Theater draws from cinema history while building its own symbolic language.</p>
+          <p>
+            Apocalypse Theater draws from the cinematic past while pushing toward a new symbolic language of nonlinear film.
+          </p>
         </div>
 
         <div class="grid grid-3">
-          <div class="card">
+          <article class="card reveal">
+            <div class="card-glow"></div>
             <span class="tag">Past</span>
-            <h3>Welles · Coppola · Kubrick</h3>
-            <p>Classical power, mythic scale, moral conflict, and cinema as architecture.</p>
-          </div>
+            <h3>Welles &middot; Coppola &middot; Kubrick</h3>
+            <p>Classical power, mythic scale, moral conflict, psychological framing, and cinema as architecture.</p>
+          </article>
 
-          <div class="card">
+          <article class="card reveal">
+            <div class="card-glow"></div>
             <span class="tag">Present</span>
-            <h3>Nolan · Villeneuve · Fincher · Lynch</h3>
-            <p>Nonlinear time, atmosphere, dread, memory, silence, and tension.</p>
-          </div>
+            <h3>Nolan &middot; Villeneuve &middot; Fincher &middot; Lynch</h3>
+            <p>Nonlinear time, atmosphere, dread, memory, obsession, silence, tension, and emotional precision.</p>
+          </article>
 
-          <div class="card">
+          <article class="card reveal">
+            <div class="card-glow"></div>
             <span class="tag">Performance</span>
-            <h3>Brando · Day-Lewis · Gyllenhaal</h3>
-            <p>Transformation, rupture, restraint, volatility, and emotional precision.</p>
-          </div>
+            <h3>Brando &middot; Day-Lewis &middot; Gyllenhaal</h3>
+            <p>Acting as transformation, rupture, restraint, volatility, and the embodiment of past, present, and future selves.</p>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="schedule">
+    <section id="roles">
       <div class="container">
-        <div class="section-head">
-          <span class="eyebrow">Scheduling</span>
-          <h2>Join by city, scene, or shooting window.</h2>
-          <p>Apocalypse Theater is built for precise contributions, not full-time commitment.</p>
+        <div class="section-head reveal">
+          <span class="eyebrow">Open Collaboration Roles</span>
+          <h2>Current short-film needs.</h2>
+          <p>
+            Members can request to help depending on the project, city, production stage, and available role.
+          </p>
         </div>
 
         <div class="grid grid-3">
-          <div class="card"><span class="tag">Physical</span><h3>One Day</h3><p>Acting, scouting, setup, camera tests, or location support.</p></div>
-          <div class="card"><span class="tag">Production</span><h3>Weekend</h3><p>Small shoot, scene development, set design, or filming block.</p></div>
-          <div class="card"><span class="tag">Remote</span><h3>One Month</h3><p>Writing, editing, music, sound, mood boarding, or storyboarding.</p></div>
+          <article class="card role-card reveal"><div class="card-glow"></div><h3>Actor</h3><p>For protagonist, antagonist, or supporting roles requiring emotional presence, dialogue, movement, restraint, and intensity.</p></article>
+          <article class="card role-card reveal"><div class="card-glow"></div><h3>Actress</h3><p>For protagonist, antagonist, or supporting roles shaped by contrast, silence, memory, emotional tension, and symbolic performance.</p></article>
+          <article class="card role-card reveal"><div class="card-glow"></div><h3>Cinematographer</h3><p>For collaborators with a strong eye for framing, shadow, texture, motion, symbolic composition, and city-based visual storytelling.</p></article>
+          <article class="card role-card reveal"><div class="card-glow"></div><h3>Set Design</h3><p>For creators interested in building visual atmosphere through objects, rooms, clothing, color, architecture, and environmental detail.</p></article>
+          <article class="card role-card reveal"><div class="card-glow"></div><h3>Screenwriter</h3><p>For remote collaborators interested in nonlinear structure, dialogue, character arcs, symbolic themes, and emotional story logic.</p></article>
+          <article class="card role-card reveal"><div class="card-glow"></div><h3>Music Composer</h3><p>For musicians creating original soundscapes, motifs, and experimental compositions over several weeks or one-month timelines.</p></article>
+          <article class="card role-card reveal"><div class="card-glow"></div><h3>Scene Editor</h3><p>For editors drawn to rhythm, nonlinear construction, emotional cuts, dream logic, silence, and precise visual transitions.</p></article>
+          <article class="card role-card reveal"><div class="card-glow"></div><h3>Production Assistant</h3><p>For members who can help during shooting days with logistics, setup, coordination, timing, equipment, and on-location support.</p></article>
+          <article class="card role-card reveal"><div class="card-glow"></div><h3>Location Scout</h3><p>For collaborators who can identify cinematic streets, rooms, forests, train stations, old buildings, churches, bridges, and landscapes.</p></article>
         </div>
       </div>
     </section>
 
-    <section id="contact">
+    <section id="projects">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head reveal">
+          <span class="eyebrow">Projects in Development</span>
+          <h2>Current cinematic worlds.</h2>
+          <p>
+            These projects are in different stages of development. Members may request to support specific films
+            depending on role, location, and production stage.
+          </p>
+        </div>
+
+        <div class="grid grid-3">
+          <article class="card reveal">
+            <div class="card-glow"></div>
+            <h3>Regensburg</h3>
+            <p><span class="status">Stage:</span> Synopsis / mood development</p>
+            <p>A returning student relives intertwined love stories from abroad as memory, premonition, and collective anxiety blur into an impending rupture.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-glow"></div>
+            <h3>New Social Order</h3>
+            <p><span class="status">Stage:</span> Script world development</p>
+            <p>Across cities and shifting ideologies, a young man searches for identity and intimacy as political tension and personal disillusionment quietly converge.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-glow"></div>
+            <h3>Rubatosis</h3>
+            <p><span class="status">Stage:</span> Sound and visual concept</p>
+            <p>After a cosmic encounter alters her mind and body, a physicist begins to perceive time, emotion, and reality as unstable frequencies.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-glow"></div>
+            <h3>Downstream West</h3>
+            <p><span class="status">Stage:</span> Mythic western development</p>
+            <p>An amnesiac outlaw wanders a fractured West, chasing vengeance and identity as memory, masculinity, and loyalty collapse into myth.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-glow"></div>
+            <h3>Ocean Castle</h3>
+            <p><span class="status">Stage:</span> Character and crime-world development</p>
+            <p>A dying informant ascends a criminal empire while love, betrayal, and exile entangle in a final attempt at escape.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-glow"></div>
+            <h3>La Rosa Blanca</h3>
+            <p><span class="status">Stage:</span> Reverse tragedy structure</p>
+            <p>A politician&rsquo;s search for truth unravels into a reverse-told tragedy of love, violence, and the quiet tyranny of memory.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-glow"></div>
+            <h3>Eye of an Eclipse</h3>
+            <p><span class="status">Stage:</span> Thriller structure</p>
+            <p>After betrayal fractures a covert mission, a fugitive agent follows a cryptic trail across Europe as unseen forces close in.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-glow"></div>
+            <h3>Ozymandias&rsquo; Mirror</h3>
+            <p><span class="status">Stage:</span> Sci-fi metaphysical concept</p>
+            <p>A deep-space mission to recover a lost signal reveals a reality where time bends inward and existence begins to question itself.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-glow"></div>
+            <h3>Unknown Archetype</h3>
+            <p><span class="status">Stage:</span> AI / memory fracture development</p>
+            <p>After a neural simulation fractures his memory and sense of self, an AI ethicist drifts through collapsing timelines, where protection turns into annihilation.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="cities">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">City-Based Production</span>
+          <h2>Join by city, scene, or shooting window.</h2>
+          <p>
+            The long-term vision is to allow members to support production when they are already in a city
+            or able to travel for a short filming window.
+          </p>
+        </div>
+
+        <div class="grid grid-3">
+          <article class="card reveal"><div class="card-glow"></div><h3>Germany</h3><p>Nuremberg &middot; Munich &middot; Berlin &middot; Regensburg &middot; Cologne &middot; Hamburg</p></article>
+          <article class="card reveal"><div class="card-glow"></div><h3>Italy</h3><p>Milan &middot; Rome &middot; Florence &middot; Bologna &middot; Venice &middot; Naples</p></article>
+          <article class="card reveal"><div class="card-glow"></div><h3>Future Expansion</h3><p>Paris &middot; Vienna &middot; Prague &middot; Barcelona &middot; Lisbon &middot; Athens</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="request">
+      <div class="container">
+        <div class="divider-statement reveal">
+          <span class="eyebrow">Production Ethos</span>
+          <p class="quote">
+            Some collaborators may join for one shooting day in Berlin. Others may spend one month composing
+            the emotional architecture of a 10-minute short film.
+          </p>
+          <p class="lead">
+            Both forms of collaboration matter. Apocalypse Theater is built for people who cannot give everything,
+            but can still give something precise, beautiful, and unforgettable.
+          </p>
+        </div>
+
+        <div class="section-head reveal" style="margin-top: 4rem;">
           <span class="eyebrow">Request to Help</span>
           <h2>Send your role, city, and availability.</h2>
-          <p>Name · City · Role · Availability · Project interest · Portfolio link · Short note.</p>
+          <p>Name &middot; City &middot; Role &middot; Availability &middot; Project interest &middot; Portfolio link &middot; Short note.</p>
 
-          <a class="button button-primary" href="mailto:hello@apocalypsetheater.org?subject=Apocalypse%20Theater%20Collaboration%20Request">
+          <a
+            class="button button-primary"
+            href="mailto:hello@apocalypsetheater.org?subject=Apocalypse%20Theater%20Collaboration%20Request"
+          >
             Send Collaboration Request
           </a>
 
@@ -603,14 +993,66 @@
             </a>
           </div>
         </div>
+
+        <div class="grid grid-2">
+          <article class="card reveal">
+            <div class="card-glow"></div>
+            <h3>For Physical Production</h3>
+            <p>Please include your city, available dates, role, whether you can travel, and which project or scene interests you.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-glow"></div>
+            <h3>For Remote Collaboration</h3>
+            <p>Please include your role, timeline availability, creative samples, and whether you are interested in writing, editing, music, sound, or visual planning.</p>
+          </article>
+        </div>
       </div>
     </section>
   </main>
 
   <footer>
     <div class="container">
-      <p>© 2026 Apocalypse Theater · Production Cinema</p>
+      <p>&copy; 2026 Apocalypse Theater &middot; Production Cinema</p>
+      <p>This page is intended as a concept space for collaborators and production development.</p>
+      <p>Email: <a href="mailto:hello@apocalypsetheater.org">hello@apocalypsetheater.org</a></p>
     </div>
   </footer>
+
+  <a class="feedback-button" href="mailto:hello@apocalypsetheater.org?subject=Apocalypse%20Theater%20Feedback">
+    Request / Feedback
+  </a>
+
+  <script>
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    document.querySelectorAll(".reveal").forEach(element => observer.observe(element));
+
+    document.querySelectorAll(".card, .hero-card").forEach(card => {
+      let glow = card.querySelector(".card-glow");
+
+      if (!glow) {
+        glow = document.createElement("div");
+        glow.className = "card-glow";
+        card.prepend(glow);
+      }
+
+      card.addEventListener("mousemove", event => {
+        const rect = card.getBoundingClientRect();
+        glow.style.left = `${event.clientX - rect.left}px`;
+        glow.style.top = `${event.clientY - rect.top}px`;
+      });
+    });
+  </script>
 </body>
 </html>
