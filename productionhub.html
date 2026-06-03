@@ -171,36 +171,22 @@
     .hero {
       min-height: 86vh;
       display: grid;
-      place-items: center;
+      align-items: center;
       border-top: none;
       padding-top: 4rem;
       position: relative;
       overflow: hidden;
     }
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(90deg, rgba(0, 0, 0, 0.94) 0%, rgba(0, 0, 0, 0.76) 45%, rgba(0, 0, 0, 0.42) 100%),
-        url("assets/theater.jpg") center right / cover no-repeat;
-      opacity: 0.9;
-      z-index: 0;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at top left, rgba(244, 239, 207, 0.08), transparent 34%),
-        radial-gradient(circle at bottom right, rgba(185, 196, 240, 0.12), transparent 38%);
-      pointer-events: none;
-      z-index: 1;
+    .production-hero-grid {
+      display: grid;
+      grid-template-columns: 1.02fr 0.98fr;
+      gap: 2rem;
+      align-items: stretch;
     }
 
     .hero-card {
+      min-height: clamp(520px, 68vh, 720px);
       padding: clamp(2.2rem, 5vw, 4.8rem);
       background: linear-gradient(180deg, rgba(12, 12, 12, 0.78), rgba(5, 5, 5, 0.86));
       border: 1px solid rgba(189, 205, 255, 0.36);
@@ -209,13 +195,44 @@
       overflow: visible;
       z-index: 2;
       backdrop-filter: blur(8px);
-      max-width: 860px;
+      display: flex;
+      align-items: center;
     }
 
     .hero-content {
       position: relative;
       z-index: 2;
       max-width: 860px;
+    }
+
+    .hero-image-frame {
+      min-height: clamp(520px, 68vh, 720px);
+      border: 1px solid rgba(189, 205, 255, 0.36);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+      background: #000;
+    }
+
+    .hero-image-frame::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.18), transparent),
+        radial-gradient(circle at 25% 20%, rgba(244, 239, 207, 0.1), transparent 34%),
+        radial-gradient(circle at 80% 80%, rgba(31, 47, 140, 0.18), transparent 38%);
+      pointer-events: none;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 100%;
+      min-height: clamp(520px, 68vh, 720px);
+      object-fit: cover;
+      object-position: center;
+      filter: grayscale(100%) contrast(112%);
+      opacity: 0.9;
     }
 
     .eyebrow {
@@ -424,6 +441,56 @@
       box-shadow: var(--shadow);
     }
 
+    .visual-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.82fr;
+      gap: 2rem;
+      align-items: stretch;
+    }
+
+    .visual-copy-panel {
+      padding: clamp(2rem, 4vw, 3rem);
+      background: linear-gradient(180deg, rgba(12, 12, 12, 0.94), rgba(5, 5, 5, 0.98));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .visual-image {
+      min-height: 420px;
+      border: 1px solid var(--line);
+      background-size: cover;
+      background-position: center;
+      filter: grayscale(100%) contrast(112%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .visual-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.48)),
+        radial-gradient(circle at 30% 20%, rgba(244, 239, 207, 0.1), transparent 34%),
+        radial-gradient(circle at 80% 80%, rgba(31, 47, 140, 0.16), transparent 38%);
+      pointer-events: none;
+    }
+
+    .sound-visual {
+      background-image: url("assets/sound.jpg");
+      background-position: center;
+    }
+
+    .request-visual {
+      background-image: url("assets/request.jpg");
+      background-position: center top;
+    }
+
+    .composer-line {
+      font-size: clamp(1.1rem, 2vw, 1.6rem);
+      line-height: 1.35;
+    }
+
     .social-icons {
       display: flex;
       align-items: center;
@@ -550,13 +617,25 @@
       }
 
       .grid-2,
-      .grid-3 {
+      .grid-3,
+      .production-hero-grid,
+      .visual-grid {
         grid-template-columns: 1fr;
       }
 
       .hero {
         min-height: auto;
         padding-top: 4.5rem;
+      }
+
+      .hero-card,
+      .hero-image-frame,
+      .hero-image {
+        min-height: 420px;
+      }
+
+      .visual-image {
+        min-height: 360px;
       }
     }
 
@@ -567,8 +646,19 @@
 
       .hero-card,
       .card,
-      .divider-statement {
+      .divider-statement,
+      .visual-copy-panel {
         border-radius: 0;
+      }
+
+      .hero-card,
+      .hero-image-frame,
+      .hero-image {
+        min-height: 340px;
+      }
+
+      .visual-image {
+        min-height: 300px;
       }
 
       .button-row {
@@ -584,129 +674,6 @@
         bottom: 0.75rem;
       }
     }
-
-    /* Visual additions — aligned hero image + right-side image panels */
-    .visual-panel {
-      min-height: 420px;
-      border: 1px solid rgba(189, 205, 255, 0.36);
-      background:
-        linear-gradient(120deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.5)),
-        var(--visual-image, url("assets/theater.jpg")) center / cover no-repeat;
-      box-shadow: var(--shadow);
-      filter: grayscale(100%) contrast(112%);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .visual-panel::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(244, 239, 207, 0.13), transparent 32%),
-        radial-gradient(circle at 82% 78%, rgba(31, 47, 140, 0.22), transparent 34%),
-        linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.24));
-      pointer-events: none;
-    }
-
-    .visual-panel:hover {
-      filter: grayscale(76%) contrast(116%);
-    }
-
-    .visual-panel-label {
-      position: absolute;
-      left: 1.25rem;
-      bottom: 1.15rem;
-      z-index: 2;
-      color: var(--soft);
-      font-size: 0.78rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-    .founder-visual {
-      --visual-image: url("assets/theater.jpg");
-    }
-
-    .contact-visual {
-      --visual-image: url("assets/contact.jpg");
-    }
-
-    .production-visual {
-      --visual-image: url("assets/production.jpg");
-    }
-
-    .sound-visual {
-      --visual-image: url("assets/sound.jpg");
-    }
-
-    .request-visual {
-      --visual-image: url("assets/request.jpg");
-    }
-
-    .contact-grid,
-    .production-hero-grid,
-    .sound-visual-grid,
-    .request-grid {
-      display: grid;
-      grid-template-columns: 1.02fr 0.98fr;
-      gap: 2rem;
-      align-items: stretch;
-    }
-
-    .contact-grid .section-head,
-    .request-grid .section-head {
-      margin-bottom: 0;
-      align-self: center;
-    }
-
-    .hero-grid {
-      align-items: stretch;
-    }
-
-    .hero-card {
-      height: 100%;
-      min-height: 560px;
-      display: flex;
-      align-items: center;
-    }
-
-    .hero-image-frame {
-      height: 100%;
-      min-height: 560px;
-    }
-
-    .hero-image {
-      min-height: 100%;
-    }
-
-    .production-hero-grid .hero-card {
-      max-width: none;
-    }
-
-    .sound-name-list {
-      font-size: clamp(1.15rem, 2.1vw, 1.72rem);
-      line-height: 1.32;
-    }
-
-    @media (max-width: 980px) {
-      .contact-grid,
-      .production-hero-grid,
-      .sound-visual-grid,
-      .request-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-card,
-      .hero-image-frame {
-        min-height: 420px;
-      }
-
-      .visual-panel {
-        min-height: 340px;
-      }
-    }
-
   </style>
 </head>
 
@@ -753,8 +720,12 @@
           </div>
         </div>
 
-        <div class="visual-panel production-visual reveal" aria-label="Production cinema visual">
-          <span class="visual-panel-label">Production Cinema</span>
+        <div class="hero-image-frame reveal">
+          <img
+            class="hero-image"
+            src="assets/production.jpg"
+            alt="Classic cinema production still"
+          />
         </div>
       </div>
     </section>
@@ -883,50 +854,48 @@
     </section>
 
     <section id="sound">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="eyebrow">Sound Philosophy</span>
-          <h2>Music must drive the narrative forward.</h2>
-          <p>
-            Apocalypse Theater is seeking musicians and sound artists who can create experimental soundscapes
-            across several weeks, especially for short films between 5 and 20 minutes depending on the project.
-          </p>
-        </div>
-
-        <div class="grid grid-2">
-          <article class="card reveal">
-            <div class="card-glow"></div>
-            <h3>Remote Music Composition</h3>
+      <div class="container visual-grid">
+        <div>
+          <div class="section-head reveal">
+            <span class="eyebrow">Sound Philosophy</span>
+            <h2>Music must drive the narrative forward.</h2>
             <p>
-              Musicians can work remotely from their own studios to create original compositions,
-              motifs, textures, rhythms, and transitions over several weeks or one month.
-            </p>
-            <p>The goal is not generic scoring. The goal is emotional architecture.</p>
-          </article>
-
-          <article class="card reveal">
-            <div class="card-glow"></div>
-            <h3>Experimental Instruments</h3>
-            <p>
-              Especially welcome: woodwinds, drums, guitar, synthesizer, piano, percussion,
-              ambient textures, field recordings, distorted rhythm, silence, and hybrid acoustic-electronic sound.
-            </p>
-            <p>The sound should feel cinematic, mythic, unstable, and alive.</p>
-          </article>
-        </div>
-
-        <div class="sound-visual-grid" style="margin-top: 1.5rem;">
-          <div class="divider-statement reveal">
-            <p class="quote sound-name-list">
-              Inspired by the emotional force of Hans Zimmer, John Williams, Ludwig G&ouml;ransson, Ennio Morricone,
-              Gustav Mahler, Philip Glass, Richard Wagner, and Pyotr Ilyich Tchaikovsky.
+              Apocalypse Theater is seeking musicians and sound artists who can create experimental soundscapes
+              across several weeks, especially for short films between 5 and 20 minutes depending on the project.
             </p>
           </div>
 
-          <div class="visual-panel sound-visual reveal" aria-label="Music and sound composition visual">
-            <span class="visual-panel-label">Sound as Architecture</span>
+          <div class="grid grid-2">
+            <article class="card reveal">
+              <div class="card-glow"></div>
+              <h3>Remote Music Composition</h3>
+              <p>
+                Musicians can work remotely from their own studios to create original compositions,
+                motifs, textures, rhythms, and transitions over several weeks or one month.
+              </p>
+              <p>The goal is not generic scoring. The goal is emotional architecture.</p>
+            </article>
+
+            <article class="card reveal">
+              <div class="card-glow"></div>
+              <h3>Experimental Instruments</h3>
+              <p>
+                Especially welcome: woodwinds, drums, guitar, synthesizer, piano, percussion,
+                ambient textures, field recordings, distorted rhythm, silence, and hybrid acoustic-electronic sound.
+              </p>
+              <p>The sound should feel cinematic, mythic, unstable, and alive.</p>
+            </article>
+          </div>
+
+          <div class="divider-statement reveal" style="margin-top: 1.5rem;">
+            <p class="quote composer-line">
+              Inspired by the emotional force of Hans Zimmer, John Williams, Ludwig G&ouml;ransson,
+              Ennio Morricone, Gustav Mahler, Philip Glass, Richard Wagner, and Pyotr Ilyich Tchaikovsky.
+            </p>
           </div>
         </div>
+
+        <div class="visual-image sound-visual reveal" aria-label="Piano in the ocean"></div>
       </div>
     </section>
 
@@ -1100,8 +1069,8 @@
           </p>
         </div>
 
-        <div class="request-grid" style="margin-top: 4rem;">
-          <div class="section-head reveal">
+        <div class="visual-grid" style="margin-top: 4rem;">
+          <div class="visual-copy-panel reveal">
             <span class="eyebrow">Request to Help</span>
             <h2>Send your role, city, and availability.</h2>
             <p>Name &middot; City &middot; Role &middot; Availability &middot; Project interest &middot; Portfolio link &middot; Short note.</p>
@@ -1128,9 +1097,7 @@
             </div>
           </div>
 
-          <div class="visual-panel request-visual reveal" aria-label="Collaboration request visual">
-            <span class="visual-panel-label">Join the Production</span>
-          </div>
+          <div class="visual-image request-visual reveal" aria-label="Actor recording for cinema"></div>
         </div>
 
         <div class="grid grid-2" style="margin-top: 1.25rem;">
