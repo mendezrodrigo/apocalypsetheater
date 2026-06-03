@@ -584,6 +584,129 @@
         bottom: 0.75rem;
       }
     }
+
+    /* Visual additions — aligned hero image + right-side image panels */
+    .visual-panel {
+      min-height: 420px;
+      border: 1px solid rgba(189, 205, 255, 0.36);
+      background:
+        linear-gradient(120deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.5)),
+        var(--visual-image, url("assets/theater.jpg")) center / cover no-repeat;
+      box-shadow: var(--shadow);
+      filter: grayscale(100%) contrast(112%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .visual-panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(244, 239, 207, 0.13), transparent 32%),
+        radial-gradient(circle at 82% 78%, rgba(31, 47, 140, 0.22), transparent 34%),
+        linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.24));
+      pointer-events: none;
+    }
+
+    .visual-panel:hover {
+      filter: grayscale(76%) contrast(116%);
+    }
+
+    .visual-panel-label {
+      position: absolute;
+      left: 1.25rem;
+      bottom: 1.15rem;
+      z-index: 2;
+      color: var(--soft);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .founder-visual {
+      --visual-image: url("assets/theater.jpg");
+    }
+
+    .contact-visual {
+      --visual-image: url("assets/contact.jpg");
+    }
+
+    .production-visual {
+      --visual-image: url("assets/production.jpg");
+    }
+
+    .sound-visual {
+      --visual-image: url("assets/sound.jpg");
+    }
+
+    .request-visual {
+      --visual-image: url("assets/request.jpg");
+    }
+
+    .contact-grid,
+    .production-hero-grid,
+    .sound-visual-grid,
+    .request-grid {
+      display: grid;
+      grid-template-columns: 1.02fr 0.98fr;
+      gap: 2rem;
+      align-items: stretch;
+    }
+
+    .contact-grid .section-head,
+    .request-grid .section-head {
+      margin-bottom: 0;
+      align-self: center;
+    }
+
+    .hero-grid {
+      align-items: stretch;
+    }
+
+    .hero-card {
+      height: 100%;
+      min-height: 560px;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-image-frame {
+      height: 100%;
+      min-height: 560px;
+    }
+
+    .hero-image {
+      min-height: 100%;
+    }
+
+    .production-hero-grid .hero-card {
+      max-width: none;
+    }
+
+    .sound-name-list {
+      font-size: clamp(1.15rem, 2.1vw, 1.72rem);
+      line-height: 1.32;
+    }
+
+    @media (max-width: 980px) {
+      .contact-grid,
+      .production-hero-grid,
+      .sound-visual-grid,
+      .request-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card,
+      .hero-image-frame {
+        min-height: 420px;
+      }
+
+      .visual-panel {
+        min-height: 340px;
+      }
+    }
+
   </style>
 </head>
 
@@ -610,7 +733,7 @@
 
   <main>
     <section class="hero">
-      <div class="container">
+      <div class="container production-hero-grid">
         <div class="hero-card reveal">
           <div class="hero-content">
             <span class="eyebrow">Private Development Space</span>
@@ -628,6 +751,10 @@
               <a class="button" href="index.html">Return to main site</a>
             </div>
           </div>
+        </div>
+
+        <div class="visual-panel production-visual reveal" aria-label="Production cinema visual">
+          <span class="visual-panel-label">Production Cinema</span>
         </div>
       </div>
     </section>
@@ -788,11 +915,17 @@
           </article>
         </div>
 
-        <div class="divider-statement reveal" style="margin-top: 1.5rem;">
-          <p class="quote">
-            Inspired by the emotional force of Hans Zimmer, John Williams, Ludwig G&ouml;ransson, Ennio Morricone,
-            Gustav Mahler, Philip Glass, Richard Wagner, and Pyotr Ilyich Tchaikovsky.
-          </p>
+        <div class="sound-visual-grid" style="margin-top: 1.5rem;">
+          <div class="divider-statement reveal">
+            <p class="quote sound-name-list">
+              Inspired by the emotional force of Hans Zimmer, John Williams, Ludwig G&ouml;ransson, Ennio Morricone,
+              Gustav Mahler, Philip Glass, Richard Wagner, and Pyotr Ilyich Tchaikovsky.
+            </p>
+          </div>
+
+          <div class="visual-panel sound-visual reveal" aria-label="Music and sound composition visual">
+            <span class="visual-panel-label">Sound as Architecture</span>
+          </div>
         </div>
       </div>
     </section>
@@ -967,34 +1100,40 @@
           </p>
         </div>
 
-        <div class="section-head reveal" style="margin-top: 4rem;">
-          <span class="eyebrow">Request to Help</span>
-          <h2>Send your role, city, and availability.</h2>
-          <p>Name &middot; City &middot; Role &middot; Availability &middot; Project interest &middot; Portfolio link &middot; Short note.</p>
+        <div class="request-grid" style="margin-top: 4rem;">
+          <div class="section-head reveal">
+            <span class="eyebrow">Request to Help</span>
+            <h2>Send your role, city, and availability.</h2>
+            <p>Name &middot; City &middot; Role &middot; Availability &middot; Project interest &middot; Portfolio link &middot; Short note.</p>
 
-          <a
-            class="button button-primary"
-            href="mailto:hello@apocalypsetheater.org?subject=Apocalypse%20Theater%20Collaboration%20Request"
-          >
-            Send Collaboration Request
-          </a>
-
-          <div class="social-icons">
-            <a class="social-icon" href="https://www.linkedin.com/company/apocalypse-theater/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.35 8h4.3v14h-4.3V8zm7.48 0h4.12v1.91h.06c.57-1.08 1.97-2.22 4.05-2.22 4.33 0 5.13 2.85 5.13 6.56V22h-4.3v-6.88c0-1.64-.03-3.75-2.28-3.75-2.28 0-2.63 1.78-2.63 3.63V22h-4.3V8z"/></svg>
+            <a
+              class="button button-primary"
+              href="mailto:hello@apocalypsetheater.org?subject=Apocalypse%20Theater%20Collaboration%20Request"
+            >
+              Send Collaboration Request
             </a>
 
-            <a class="social-icon" href="https://www.instagram.com/apocalypsetheater/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5zM17.8 6.2a1 1 0 1 1-1 1 1 1 0 0 1 1-1z"/></svg>
-            </a>
+            <div class="social-icons">
+              <a class="social-icon" href="https://www.linkedin.com/company/apocalypse-theater/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.35 8h4.3v14h-4.3V8zm7.48 0h4.12v1.91h.06c.57-1.08 1.97-2.22 4.05-2.22 4.33 0 5.13 2.85 5.13 6.56V22h-4.3v-6.88c0-1.64-.03-3.75-2.28-3.75-2.28 0-2.63 1.78-2.63 3.63V22h-4.3V8z"/></svg>
+              </a>
 
-            <a class="social-icon" href="mailto:hello@apocalypsetheater.org" aria-label="Email">
-              <svg viewBox="0 0 24 24"><path d="M2 6a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V6zm3-.5a.5.5 0 0 0-.5.5v.6l7.5 4.7 7.5-4.7V6a.5.5 0 0 0-.5-.5H5zm14.5 4-7 4.4a1 1 0 0 1-1 0l-7-4.4V18a.5.5 0 0 0 .5.5h14a.5.5 0 0 0 .5-.5V9.5z"/></svg>
-            </a>
+              <a class="social-icon" href="https://www.instagram.com/apocalypsetheater/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5zM17.8 6.2a1 1 0 1 1-1 1 1 1 0 0 1 1-1z"/></svg>
+              </a>
+
+              <a class="social-icon" href="mailto:hello@apocalypsetheater.org" aria-label="Email">
+                <svg viewBox="0 0 24 24"><path d="M2 6a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V6zm3-.5a.5.5 0 0 0-.5.5v.6l7.5 4.7 7.5-4.7V6a.5.5 0 0 0-.5-.5H5zm14.5 4-7 4.4a1 1 0 0 1-1 0l-7-4.4V18a.5.5 0 0 0 .5.5h14a.5.5 0 0 0 .5-.5V9.5z"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="visual-panel request-visual reveal" aria-label="Collaboration request visual">
+            <span class="visual-panel-label">Join the Production</span>
           </div>
         </div>
 
-        <div class="grid grid-2">
+        <div class="grid grid-2" style="margin-top: 1.25rem;">
           <article class="card reveal">
             <div class="card-glow"></div>
             <h3>For Physical Production</h3>
