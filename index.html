@@ -674,6 +674,129 @@
         bottom: 0.75rem;
       }
     }
+
+    /* Visual additions — aligned hero image + right-side image panels */
+    .visual-panel {
+      min-height: 420px;
+      border: 1px solid rgba(189, 205, 255, 0.36);
+      background:
+        linear-gradient(120deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.5)),
+        var(--visual-image, url("assets/theater.jpg")) center / cover no-repeat;
+      box-shadow: var(--shadow);
+      filter: grayscale(100%) contrast(112%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .visual-panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(244, 239, 207, 0.13), transparent 32%),
+        radial-gradient(circle at 82% 78%, rgba(31, 47, 140, 0.22), transparent 34%),
+        linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.24));
+      pointer-events: none;
+    }
+
+    .visual-panel:hover {
+      filter: grayscale(76%) contrast(116%);
+    }
+
+    .visual-panel-label {
+      position: absolute;
+      left: 1.25rem;
+      bottom: 1.15rem;
+      z-index: 2;
+      color: var(--soft);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .founder-visual {
+      --visual-image: url("assets/theater.jpg");
+    }
+
+    .contact-visual {
+      --visual-image: url("assets/contact.jpg");
+    }
+
+    .production-visual {
+      --visual-image: url("assets/production.jpg");
+    }
+
+    .sound-visual {
+      --visual-image: url("assets/sound.jpg");
+    }
+
+    .request-visual {
+      --visual-image: url("assets/request.jpg");
+    }
+
+    .contact-grid,
+    .production-hero-grid,
+    .sound-visual-grid,
+    .request-grid {
+      display: grid;
+      grid-template-columns: 1.02fr 0.98fr;
+      gap: 2rem;
+      align-items: stretch;
+    }
+
+    .contact-grid .section-head,
+    .request-grid .section-head {
+      margin-bottom: 0;
+      align-self: center;
+    }
+
+    .hero-grid {
+      align-items: stretch;
+    }
+
+    .hero-card {
+      height: 100%;
+      min-height: 560px;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-image-frame {
+      height: 100%;
+      min-height: 560px;
+    }
+
+    .hero-image {
+      min-height: 100%;
+    }
+
+    .production-hero-grid .hero-card {
+      max-width: none;
+    }
+
+    .sound-name-list {
+      font-size: clamp(1.15rem, 2.1vw, 1.72rem);
+      line-height: 1.32;
+    }
+
+    @media (max-width: 980px) {
+      .contact-grid,
+      .production-hero-grid,
+      .sound-visual-grid,
+      .request-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card,
+      .hero-image-frame {
+        min-height: 420px;
+      }
+
+      .visual-panel {
+        min-height: 340px;
+      }
+    }
+
   </style>
 </head>
 
@@ -744,7 +867,9 @@
           image, music, and silence.
         </p>
       </div>
-      <div class="split-image" aria-label="Cinematic theater image"></div>
+      <div class="visual-panel founder-visual reveal" aria-label="Cinematic theater image">
+        <span class="visual-panel-label">Founder&rsquo;s Inspiration</span>
+      </div>
     </section>
 
     <section id="philosophy">
@@ -900,7 +1025,7 @@
     </section>
 
     <section id="contact">
-      <div class="container">
+      <div class="container contact-grid">
         <div class="section-head reveal">
           <span class="eyebrow">Contact</span>
           <h2>Begin the conversation.</h2>
@@ -919,6 +1044,10 @@
               <svg viewBox="0 0 24 24"><path d="M2 6a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V6zm3-.5a.5.5 0 0 0-.5.5v.6l7.5 4.7 7.5-4.7V6a.5.5 0 0 0-.5-.5H5zm14.5 4-7 4.4a1 1 0 0 1-1 0l-7-4.4V18a.5.5 0 0 0 .5.5h14a.5.5 0 0 0 .5-.5V9.5z"/></svg>
             </a>
           </div>
+        </div>
+
+        <div class="visual-panel contact-visual reveal" aria-label="Cinema collaboration contact visual">
+          <span class="visual-panel-label">Collaboration</span>
         </div>
       </div>
     </section>
