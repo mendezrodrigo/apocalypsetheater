@@ -500,6 +500,29 @@
       box-shadow: var(--shadow);
     }
 
+
+    .statement-centered {
+      max-width: 980px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      padding: clamp(2.6rem, 5vw, 4.4rem);
+    }
+
+    .statement-centered .quote,
+    .statement-centered .lead {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .statement-centered .quote {
+      max-width: 54rem;
+    }
+
+    .statement-centered .lead {
+      max-width: 48rem;
+    }
+
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr 0.82fr;
@@ -894,7 +917,7 @@
 
     <section id="statement">
       <div class="container">
-        <div class="divider-statement reveal">
+        <div class="divider-statement statement-centered reveal">
           <p class="quote">&ldquo;This is not a studio. It is a confrontation with memory, myth, and collapse.&rdquo;</p>
           <p class="lead" style="margin-top: 1rem;">
             Nonlinear time, unstable identity, and meaning rebuilt through image, sound, and silence.
