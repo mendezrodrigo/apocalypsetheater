@@ -926,6 +926,92 @@
       justify-content: center;
     }
 
+  
+
+    /* V8 STICKY NAV + FIXED FEEDBACK + HERO BUTTON ALIGNMENT */
+    header {
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 2400 !important;
+    }
+
+    main,
+    footer {
+      position: relative;
+      z-index: 1;
+    }
+
+    .feedback-button {
+      position: fixed !important;
+      right: 1.2rem !important;
+      bottom: 1.2rem !important;
+      left: auto !important;
+      z-index: 3200 !important;
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+    }
+
+    .hero .button-row {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: flex-start;
+      gap: clamp(0.5rem, 1.2vw, 0.95rem);
+      width: 100%;
+      max-width: 44rem;
+    }
+
+    .hero .button {
+      flex: 1 1 0;
+      min-width: 0;
+      width: auto !important;
+      white-space: nowrap;
+      text-align: center;
+      padding-left: clamp(0.55rem, 1.25vw, 1.2rem);
+      padding-right: clamp(0.55rem, 1.25vw, 1.2rem);
+      font-size: clamp(0.74rem, 1.18vw, 0.92rem);
+    }
+
+    .quote-line {
+      display: block;
+    }
+
+    @media (max-width: 980px) {
+      header {
+        position: sticky !important;
+        top: 0 !important;
+      }
+
+      .hero .button-row {
+        flex-wrap: nowrap !important;
+      }
+
+      .hero .button {
+        width: auto !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero .button-row {
+        gap: 0.42rem;
+        align-items: center;
+      }
+
+      .hero .button {
+        min-height: 42px;
+        padding: 0.62rem 0.42rem;
+        font-size: clamp(0.62rem, 2.45vw, 0.74rem);
+        letter-spacing: -0.01em;
+      }
+
+      .feedback-button {
+        right: 0.75rem !important;
+        bottom: 0.75rem !important;
+      }
+    }
+
   </style>
 </head>
 
@@ -961,7 +1047,7 @@
           <div class="hero-content">
             <span class="eyebrow">Cinema &middot; Myth &middot; Memory &middot; Prophecy</span>
             <h1>Apocalypse Theater</h1>
-            <p class="quote">Cinema does not only reveal. It reconstructs reality.</p>
+            <p class="quote"><span class="quote-line">Cinema does not only reveal.</span><span class="quote-line">It reconstructs reality.</span></p>
             <p class="lead">
               Nonlinear cinema shaped by myth, sound, memory, and collaboration.
             </p>
