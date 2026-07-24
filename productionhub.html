@@ -108,13 +108,17 @@
       min-width: max-content;
     }
 
-    .brand-mark {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: conic-gradient(from 180deg, var(--red), var(--blue), var(--red));
-      box-shadow: 0 0 28px rgba(185, 196, 240, 0.18);
-    }
+    .brand-logo {
+     width: 52px;
+     height: 52px;
+     flex: 0 0 auto;
+     display: block;
+     object-fit: contain;
+     border-radius: 50%;
+     box-shadow:
+     0 0 0 1px rgba(189, 205, 255, 0.18),
+     0 0 28px rgba(185, 196, 240, 0.16);
+   }
 
     .brand {
       font-size: clamp(1.35rem, 2vw, 1.9rem);
@@ -1041,9 +1045,13 @@
   <header>
     <div class="container nav">
       <a href="index.html" class="brand-wrap" aria-label="Apocalypse Theater main site">
-        <span class="brand-mark" aria-hidden="true"></span>
-        <span class="brand">Apocalypse Theater</span>
-      </a>
+     <img
+      class="brand-logo"
+       src="assets/logo.png"
+       alt="Apocalypse Theater logo"
+      />
+      <span class="brand">Apocalypse Theater</span>
+     </a>
 
       <nav class="nav-links" aria-label="Production navigation">
         <a href="index.html">Main Site</a>
